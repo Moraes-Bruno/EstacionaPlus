@@ -1,0 +1,14 @@
+html,
+body {
+    height: 100%;
+}
+
+#map {
+    position: absolute;
+    height: 100%;
+    /* The height is automatic */
+    width: 100%;
+    /* The width is the width of the web page */
+    margin: 0;
+    padding: 0;
+}
