@@ -21,17 +21,21 @@ function initMap() {
       },
       {
         posicao: { lat: -22.432932, lng: -46.834286 },
-        titulo: 'Localização 2',
-        descricao: 'Descrição do local 2'
+        titulo: 'Estacionamento 2',
+        vagas: "Total de Vagas: "+20,
+        vagas_disponiveis:"Vagas Disponiveis: "+11,
       },
       {
         posicao: { lat: -22.438000, lng: -46.825000 },
-        titulo: 'Localização 3',
-        descricao: 'Descrição do local 3'
-      }, {
+        titulo: 'Estacionamento 3',
+        vagas: "Total de Vagas: "+60,
+        vagas_disponiveis:"Vagas Disponiveis: "+10,
+      },
+       {
         posicao: { lat: -22.435000, lng: -46.821000 },
-        titulo: 'Localização 4',
-        descricao: 'Descrição do local 4'
+        titulo: 'Estacionamento 4',
+        vagas: "Total de Vagas: "+10,
+        vagas_disponiveis:"Vagas Disponiveis: "+2,
       }
       // Adicione mais localizações, se necessário
     ];
