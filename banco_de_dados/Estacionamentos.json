@@ -1,0 +1,31 @@
+[{
+  "_id": {
+    "$oid": "6466b35a6cd68ae77f053cc4"
+  },
+  "lat": -22.439251,
+  "lng": -46.811234,
+  "nome": "Estacionamento LTDA",
+  "vagas": 30,
+  "vagas_disponiveis": 10,
+  "endereco": "Rual tal bairro tal"
+},{
+  "_id": {
+    "$oid": "6466b35a6cd68ae77f053cc5"
+  },
+  "lat": -22.432932,
+  "lng": -46.834286,
+  "nome": "Estaciona+",
+  "vagas": 100,
+  "vagas_disponiveis": 5,
+  "endereco": "Rua x bairro y"
+},{
+  "_id": {
+    "$oid": "6466b35a6cd68ae77f053cc6"
+  },
+  "lat": -22.4381234,
+  "lng": -46.8251234,
+  "nome": "Supermercado",
+  "vagas": 20,
+  "vagas_disponiveis": 10,
+  "endereco": "teste"
+}]
