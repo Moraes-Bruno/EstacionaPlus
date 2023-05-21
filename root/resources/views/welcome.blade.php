@@ -11,7 +11,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mapa</title>
-  <link rel="stylesheet" href="../css/index.css">
+  <link rel="stylesheet" href="/css/app.css">
 
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -21,8 +21,8 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-  <script src="../js/index.js">//Arquivo que contem a api do mapa,juntamente com a suas funcionalidades</script>
-  <link rel="stylesheet" href="../css/estacionamento.css">
+  <script src="/js/mainMapa.js">//Arquivo que contem a api do mapa,juntamente com a suas funcionalidades</script>
+  <link rel="stylesheet" href="/css/estacionamento.css">
 </head>
 
 <body>
@@ -111,7 +111,7 @@
     </div>
   </div>
   <script
-    src="https://maps.googleapis.com/maps/api/js?key= //CHAVE\\ &callback=initMap&v=weekly"
+    src="https://maps.googleapis.com/maps/api/js?key={API_KEY}&callback=initMap&v=weekly"
     defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
     integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
