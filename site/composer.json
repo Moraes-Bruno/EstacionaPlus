@@ -1,0 +1,6 @@
+{
+    "require": {
+        "composer/composer": "^2.5",
+        "mongodb/mongodb": "^1.12"
+    }
+}
