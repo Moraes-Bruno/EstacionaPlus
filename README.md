@@ -7,7 +7,8 @@ Dev Branch
 2 - cd EstacionaPlus/root
 
 3 - sudo cp .env.example .env
-    3.1 - Fazer as alterações no arquivo .env
+
+3.1 - Fazer as alterações no arquivo .env
 
 4 - composer install
 
