@@ -9,7 +9,7 @@ class VagaController extends Controller
 {
    public function show()
    {
-       return view('welcome', [
+       return view('index', [
            'vagas' => Vaga::all()
        ]);
    }
