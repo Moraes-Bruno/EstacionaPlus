@@ -1,6 +1,7 @@
 Dev Branch
 
 0 - https://www.php.net/manual/en/mongodb.installation.pecl.php
+0 - https://getcomposer.org/
 
 1 - git clone -b dev --single-branch https://github.com/Moraes-Bruno/EstacionaPlus.git
 
@@ -16,6 +17,4 @@ Dev Branch
 
 6 - sudo php artisan key:generate
 
-7 - Alterar a api_key: resources/views/welcome.blade.php
-
-8 - php artisan serve
+7 - php artisan serve
