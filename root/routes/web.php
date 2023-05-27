@@ -16,3 +16,5 @@ use App\Http\Controllers\VagaController;
 
 
 Route::get('/', [VagaController::class, 'show']);
+
+Route::view('/estacionamentoCad','estacionamentoCad');

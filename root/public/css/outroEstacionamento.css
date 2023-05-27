@@ -1,0 +1,52 @@
+#estacionamento {
+    width: 700px;
+    height: 200px;
+    padding: 5px;
+    margin: 25px;
+  }
+  
+  .vaga {
+    width: 80px;
+    height: 50px;
+    border-top: 5px solid  grey;
+    border-left: 10px solid  grey;
+    border-bottom: 5px solid  grey;
+  }
+
+  .cima{
+    border-top: 10px solid  grey;
+  }
+  
+  .baixo{
+    border-bottom: 10px solid  grey;
+  }
+
+.quadro{
+    width: 1000px;
+    height: 700px;
+    margin: auto;
+    background-color: white;
+}
+
+  /* Media Query para telas menores que 600px */
+@media (max-width: 500px) {
+    #estacionamento {
+      width: 100%;
+      height: auto;
+      padding: 0;
+    }
+  
+    .vaga,
+    .vagacima {
+      width: 100%;
+      height: 50px;
+      border: none;
+      border-bottom: 5px solid grey;
+      margin-bottom: 5px;
+    }
+  
+    .cima,
+    .baixo {
+      border: none;
+    }
+  }
