@@ -18,3 +18,15 @@ use App\Http\Controllers\VagaController;
 Route::get('/', [VagaController::class, 'show']);
 
 Route::view('/estacionamentoCad','estacionamentoCad');
+
+use App\Http\Controllers\EstacionamentoController;
+
+Route::post('/estacionamento/inserir', [EstacionamentoController::class, 'inserir'])->name('estacionamento.inserir');
+
+
+
+
+
+
+
+

@@ -72,8 +72,9 @@
 
         <div class="row">
             <div class="col-md-12">
-                <form action="../php/insere_estacionamento.php" method="POST" class="w-50 d-flex flex-column m-auto">
-
+                <form action="{{ route('estacionamento.inserir') }}" method="POST" class="w-50 d-flex flex-column m-auto">
+                    
+                   @csrf
 
                     <h3>Localização</h3>
 
