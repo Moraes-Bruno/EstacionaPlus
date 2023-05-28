@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VagaController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\EstacionamentoController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,3 +27,6 @@ Route::get('/admin/estacionamentos', [AdminController::class, 'exibir_estacionam
 Route::get('/admin/estacionamentos/adicionar', [AdminController::class, 'adicionar_estacionamentos']);
 Route::get('/admin/estacionamentos/alterar', [AdminController::class, 'alterar_estacionamentos']);
 Route::get('/admin/estacionamentos/detalhes', [AdminController::class, 'detalhes_estacionamentos']);
+Route::view('/estacionamentoCad','estacionamentoCad');
+Route::post('/estacionamento/inserir', [EstacionamentoController::class, 'inserir'])->name('estacionamento.inserir');
+
