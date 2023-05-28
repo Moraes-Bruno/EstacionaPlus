@@ -15,8 +15,18 @@
 </section>
 @endsection
 @section('content')
+<?php
+$id = $_GET['usuario'];
+
+require app_path('/Classes/Usuario.php');
+
+$u = new Usuario;
+
+$usuario = $u->listar_especifico($id);
+?>
 <section class="content">
-    <form action="" method="post">
+    <form action="{{ route('usuario.alterar') }}" method="post">
+        @csrf
         <div class="card card-warning">
             <div class="card-header">
                 <h3 class="card-title">Informações Gerais</h3>
@@ -28,22 +38,38 @@
                 </div>
             </div>
             <div class="card-body">
+                <input type="hidden" name="id" id="id" value="<?= $id ?>">
                 <div class="form-group">
                     <label for="nome">Nome:</label>
-                    <input type="text" id="nome" name="nome" class="form-control">
+                    <input type="text" id="nome" name="nome" class="form-control" value="<?= $usuario->nome ?>">
                 </div>
                 <div class="form-group">
                     <label for="email">Email:</label>
-                    <input type="text" id="email" name="email" class="form-control">
+                    <input type="text" id="email" name="email" class="form-control" value="<?= $usuario->email ?>">
                 </div>
                 <div class="form-group">
                     <label for="senha">Senha:</label>
-                    <input type="password" id="senha" name="senha" class="form-control">
+                    <input type="text" id="senha" name="senha" class="form-control" value="<?= $usuario->senha ?>">
                 </div>
                 <div class="form-group">
                     <p>Favoritos:</p>
-                    <input type="checkbox" id="EstacionamentoExemplo" name="EstacionamentoExemplo">
-                    <label for="EstacionamentoExemplo">Spasso Sabores</label>
+                    <?php
+                    require app_path('/Classes/Estacionamentos.php');
+
+                    $estacionamento = new Estacionamento;
+
+                    $estacionamentos = $estacionamento->listar();
+                    foreach ($estacionamentos as $key => $estacionamento) {
+                        $titulo = $estacionamento['titulo'];
+
+                    ?>
+                        <input type="checkbox" name="favoritos[]" value="<?= $estacionamento['titulo'] ?>" <?php foreach ($usuario->favoritos as $favorito) {
+                                                                                                                if (str_contains($favorito, $estacionamento['titulo'])) {
+                                                                                                                    echo 'checked';
+                                                                                                                }
+                                                                                                            } ?>>
+                        <label for="favoritos"><?= $estacionamento['titulo'] ?></label>
+                    <?php } ?>
                 </div>
             </div>
             <!-- /.card-body -->

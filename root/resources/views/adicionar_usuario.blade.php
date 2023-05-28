@@ -16,7 +16,8 @@
 @endsection
 @section('content')
 <section class="content">
-    <form action="" method="post">
+    <form action="{{ route('usuario.inserir') }}" method="post">
+        @csrf
         <div class="card card-success">
             <div class="card-header">
                 <h3 class="card-title">Informações Gerais</h3>
@@ -42,8 +43,16 @@
                 </div>
                 <div class="form-group">
                     <p>Favoritos:</p>
-                    <input type="checkbox" id="EstacionamentoExemplo" name="EstacionamentoExemplo">
-                    <label for="EstacionamentoExemplo">Spasso Sabores</label>
+                    <?php
+                    require app_path('/Classes/Estacionamentos.php');
+
+                    $estacionamento = new Estacionamento;
+
+                    $estacionamentos = $estacionamento->listar();
+                    foreach ($estacionamentos as $key => $estacionamento) { ?>
+                        <input type="checkbox" name="favoritos[]" value="<?= $estacionamento['titulo'] ?>">
+                        <label for="favoritos"><?= $estacionamento['titulo'] ?></label>
+                    <?php } ?>
                 </div>
             </div>
             <!-- /.card-body -->

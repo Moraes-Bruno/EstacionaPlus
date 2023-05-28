@@ -1,5 +1,44 @@
 @extends('admin')
 
+@section('js')
+<script>
+        function initMap() {
+            // Posição inicial do mapa
+            const posicaoInicial = {
+                lat: -22.434050,
+                lng: -46.828170
+            };
+
+            // Opções do mapa
+            const opcoesMapa = {
+                zoom: 15,
+                center: posicaoInicial
+            };
+
+            // Criação do mapa
+            const mapa = new google.maps.Map(document.getElementById('map'), opcoesMapa);
+
+            const marcador = new google.maps.Marker({
+                map: mapa, // O mapa onde o marcador será exibido
+                draggable: true, // Permite arrastar o marcador
+            });
+
+            // Evento de clique no mapa
+            google.maps.event.addListener(mapa, 'click', function(event) {
+                // Obtém as coordenadas do local onde foi clicado
+                const latitude = event.latLng.lat();
+                const longitude = event.latLng.lng();
+
+                // Atualiza os campos de latitude e longitude
+                document.getElementById('lat').value = latitude;
+                document.getElementById('lng').value = longitude;
+
+                // Define as coordenadas do marcador
+                marcador.setPosition(event.latLng);
+            });
+        }
+    </script>
+@endsection
 @section('content-header')
 <!-- Content Header (Page header) -->
 <section class="content-header">
@@ -15,8 +54,16 @@
 </section>
 @endsection
 @section('content')
-<section class="content">
-    <form action="" method="post">
+<section class="content m-1">
+<div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12 h-100">
+                    <div id="map" class="w-100" style="height: 300px;"></div>
+                </div>
+            </div>
+        </div>
+    <form action="{{ route('estacionamento.inserir') }}" method="post">
+    @csrf
         <div class="card card-success">
             <div class="card-header">
                 <h3 class="card-title">Informações Gerais</h3>
@@ -38,25 +85,25 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-5">
-                        <label for="endereco">Latitude:</label>
-                        <input type="text" id="endereco" name="endereco" class="form-control">
+                        <label for="lat">Latitude:</label>
+                        <input type="text" id="lat" name="lat" class="form-control">
                     </div>
                     <div class="col-5">
-                        <label for="endereco">Longitude:</label>
-                        <input type="text" id="endereco" name="endereco" class="form-control">
+                        <label for="lng">Longitude:</label>
+                        <input type="text" id="lng" name="lng" class="form-control">
                     </div>
                     <div class="col-2">
-                        <label for="endereco">Total de Vagas:</label>
-                        <input type="number" id="endereco" name="endereco" class="form-control">
+                        <label for="totalVagas">Total de Vagas:</label>
+                        <input type="number" id="totalVagas" name="totalVagas" class="form-control">
                     </div>
                 </div>
                 <div class="form-group row">
                 <div class="col-4">
                     <b><p>Tipo de vagas:</p></b>
                     <label for="normal"><div style="width:50px;height:80px;border-top: 5px solid  grey;border-left: 5px solid  grey; border-right: 5px solid  grey;"></div></label>
-                    <input type="checkbox" class="mx-2" id="normal" name="tipo">
+                    <input type="radio" value="normal" class="mx-2" id="normal" name="tipo">
                     <label for="torto"><div style="width:50px;height:80px;border-top: 5px solid  grey;border-left: 5px solid  grey; border-right: 5px solid  grey;transform: skew(14deg);"></div></label>
-                    <input class="mx-2" type="checkbox" id="torto" name="tipo">
+                    <input class="mx-2" value="torto" type="radio" id="torto" name="tipo">
                 </div>
                     <div class="col-4">
                         <label for="totalX">Total de Vagas Horizontalmente:</label>
@@ -78,5 +125,8 @@
             </div>
         </div>
     </form>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAtI-_4umSKFC-kkL4yNoUTRfBI-Qo0NDM&callback=initMap&v=weekly" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </section>
 @endsection

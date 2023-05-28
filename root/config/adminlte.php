@@ -308,10 +308,12 @@ return [
             'submenu' => [
                 [
                     'text' => 'Gerenciar',
+                    'icon' => 'fas fa-cog',
                     'url'  => '/admin/estacionamentos',
                 ],
                 [
                     'text' => 'Adicionar',
+                    'icon' => 'fas fa-plus',
                     'url'  => '/admin/estacionamentos/adicionar',
                 ],
             ],
@@ -322,10 +324,12 @@ return [
             'submenu' => [
                 [
                     'text' => 'Gerenciar',
+                    'icon' => 'fas fa-cog',
                     'url'  => '/admin/usuarios',
                 ],
                 [
                     'text' => 'Adicionar',
+                    'icon' => 'fas fa-plus',
                     'url'  => '/admin/usuarios/adicionar',
                 ],
             ],

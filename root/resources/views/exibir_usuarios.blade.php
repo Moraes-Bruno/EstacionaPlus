@@ -36,9 +36,6 @@
             <table class="table table-striped table-bordered projects">
                 <thead>
                     <tr>
-                        <th style="width: 1%">
-                            ID
-                        </th>
                         <th style="width: 25%">
                             Nome
                         </th>
@@ -54,46 +51,50 @@
                     </tr>
                 </thead>
                 <tbody>
+                <?php
+                    require app_path('/Classes/Usuario.php');
+
+                    $usuario = new Usuario;
+
+                    $usuarios = $usuario->listar();
+                    foreach ($usuarios as $key => $usuario) { ?>
                     <tr>
                         <td>
-                            #
-                        </td>
-                        <td>
                             <a>
-                                Fulano de Tal da Silva
-                            </a>
-                            <br />
-                            <small>
-                                Cadastrado em 01/01/2019
-                            </small>
-                        </td>
-                        <td>
-                            <a>
-                                Fulano_deTal@gmail.com
+                            <?= $usuario['nome'] ?>
                             </a>
                         </td>
                         <td>
                             <a>
-                                1
+                            <?= $usuario['email'] ?>
+                            </a>
+                        </td>
+                        <td>
+                            <a>
+                            <?= $usuario['favoritos'] ?>
                             </a>
                         </td>
                         <td class="project-actions text-right">
-                            <a class="btn btn-warning btn-sm" href="/admin/usuarios/detalhes">
-                                <i class="fas fa-eye">
-                                </i>
-                            </a>
-                            <a class="btn btn-info btn-sm" href="/admin/usuarios/alterar">
-                                <i class="fas fa-pencil-alt">
-                                </i>
-                                Editar
-                            </a>
-                            <a class="btn btn-danger btn-sm" href="#">
-                                <i class="fas fa-trash">
-                                </i>
-                                Excluir
-                            </a>
-                        </td>
+                                <div class="btn-group" role="group" aria-label="Ações">
+                                    <a class="btn btn-warning btn-sm mx-1" href="/admin/usuarios/detalhes?usuario=<?= $usuario['id'] ?>">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                    <a class="btn btn-info btn-sm mx-1" href="/admin/usuarios/alterar?usuario=<?= $usuario['id'] ?>">
+                                        <i class="fas fa-pencil-alt"></i>
+                                        Editar
+                                    </a>
+                                    <form action="{{ route('usuario.excluir') }}" method="post">
+                                        @csrf
+                                        <input type="hidden" name="id" id="id" value="<?= $usuario['id'] ?>">
+                                        <button class="btn btn-danger btn-sm mx-1" type="submit">
+                                            <i class="fas fa-trash"></i>
+                                            Excluir
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
                     </tr>
+                    <?php } ?>
                 </tbody>
             </table>
         </div>

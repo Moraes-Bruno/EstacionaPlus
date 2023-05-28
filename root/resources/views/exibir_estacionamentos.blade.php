@@ -27,7 +27,7 @@
                     <i class="fas fa-minus"></i>
                 </button>
                 <a class="btn btn-primary btn-sm" href="/admin/estacionamentos/adicionar">
-                <i class="fas fa-car-side"></i> <b>+</b>
+                    <i class="fas fa-car-side"></i> <b>+</b>
                 </a>
             </div>
         </div>
@@ -35,9 +35,6 @@
             <table class="table table-striped table-bordered projects">
                 <thead>
                     <tr>
-                        <th style="width: 1%">
-                            ID
-                        </th>
                         <th style="width: 20%">
                             Nome
                         </th>
@@ -59,57 +56,61 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>
-                            #
-                        </td>
-                        <td>
-                            <a>
-                                Spasso Sabores
-                            </a>
-                            <br />
-                            <small>
-                                Cadastrado em 01/01/2019
-                            </small>
-                        </td>
-                        <td>
-                            <a>
-                                Rua tal, Bairro BlaBlaBla, N°
-                            </a>
-                        </td>
-                        <td>
-                            <a>
-                            -22.432932
-                            </a>
-                        </td>
-                        <td>
-                            <a>
-                            -46.782457
-                            </a>
-                        </td>
-                        <td>
-                            <a>
-                            150
-                            </a>
-                        </td>
-                        <td class="project-actions text-right">
-                            <a class="btn btn-warning btn-sm" href="/admin/estacionamentos/detalhes">
-                                <i class="fas fa-eye">
-                                </i>
-                            </a>
-                            <a class="btn btn-info btn-sm" href="/admin/estacionamentos/alterar">
-                                <i class="fas fa-pencil-alt">
-                                </i>
-                                Editar
-                            </a>
-                            <a class="btn btn-danger btn-sm" href="#">
-                                <i class="fas fa-trash">
-                                </i>
-                                Excluir
-                            </a>
-                        </td>
-                    </tr>
+                    <?php
+                    require app_path('/Classes/Estacionamentos.php');
 
+                    $estacionamento = new Estacionamento;
+
+                    $estacionamentos = $estacionamento->listar();
+                    foreach ($estacionamentos as $key => $estacionamento) { ?>
+                        <tr>
+                            <td>
+                                <a>
+                                    <?= $estacionamento['titulo'] ?>
+                                </a>
+                            </td>
+                            <td>
+                                <a>
+                                    <?= $estacionamento['endereco'] ?>
+                                </a>
+                            </td>
+                            <td>
+                                <a>
+                                    <?= $estacionamento['latitude'] ?>
+                                </a>
+                            </td>
+                            <td>
+                                <a>
+                                    <?= $estacionamento['longitude'] ?>
+                                </a>
+                            </td>
+                            <td>
+                                <a>
+                                    <?= $estacionamento['vagas'] ?>
+                                </a>
+                            </td>
+                            <td class="project-actions text-right">
+                                <div class="btn-group" role="group" aria-label="Ações">
+                                    <a class="btn btn-warning btn-sm mx-1" href="/admin/estacionamentos/detalhes?estacionamento=<?= $estacionamento['id'] ?>">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                    <a class="btn btn-info btn-sm mx-1" href="/admin/estacionamentos/alterar?estacionamento=<?= $estacionamento['id'] ?>">
+                                        <i class="fas fa-pencil-alt"></i>
+                                        Editar
+                                    </a>
+                                    <form action="{{ route('estacionamento.excluir') }}" method="post">
+                                        @csrf
+                                        <input type="hidden" name="id" id="id" value="<?= $estacionamento['id'] ?>">
+                                        <button class="btn btn-danger btn-sm mx-1" type="submit">
+                                            <i class="fas fa-trash"></i>
+                                            Excluir
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+
+                        </tr>
+                    <?php } ?>
                 </tbody>
             </table>
         </div>
