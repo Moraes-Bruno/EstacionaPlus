@@ -15,27 +15,6 @@ class Estacionamento
         // Set up the MongoDB connection
         $this->manager = new MongoDB\Driver\Manager(env('DB_URI'));
     }
-
-    public function inserir($lat, $lng, $nome, $vagas, $endereco)
-    {
-
-        $bulkWrite = new MongoDB\Driver\BulkWrite();
-
-        // Define the document to be inserted
-        $document = [
-            'latitude' => floatval($lat),
-            'longitude' => floatval($lng),
-            'nome' => $nome,
-            'vagas' => $vagas,
-            'vagas_disponiveis' => intval($vagas),
-            'endereco' => $endereco,
-        ];
-
-        // Insert the document into the 'EstacionaMais.Estacionamentos' collection
-        $bulkWrite->insert($document);
-        $this->manager->executeBulkWrite('EstacionaMais.Estacionamentos', $bulkWrite);
-    }
-
     public function listar()
     {
         // Define the MongoDB query
