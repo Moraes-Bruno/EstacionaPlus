@@ -1,13 +1,3 @@
-<?php
-
-require app_path('/Classes/Estacionamentos.php');
-
-$estacionamento = new Estacionamento;
-
-$estacionamento->listar();
-
-?>
-
 <!DOCTYPE html>
 <!--
  @license
@@ -29,69 +19,51 @@ $estacionamento->listar();
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
   <script>
-    function initMap() {
-      // Posição inicial do mapa
-      const posicaoInicial = {
-        lat: -22.434050,
-        lng: -46.828170
-      };
+  function initMap() {
+    const posicaoInicial = {
+      lat: -22.434050,
+      lng: -46.828170
+    };
 
-      // Opções do mapa
-      const opcoesMapa = {
-        zoom: 15,
-        center: posicaoInicial
-      };
+    const opcoesMapa = {
+      zoom: 15,
+      center: posicaoInicial
+    };
 
-      // Criação do mapa
-      const mapa = new google.maps.Map(document.getElementById('map'), opcoesMapa);
+    const mapa = new google.maps.Map(document.getElementById('map'), opcoesMapa);
 
-      const locations = <?php echo json_encode($estacionamento->listar()); ?>;
-      // Marcadores de localização
-      locations.forEach(location => {
-        const marker = new google.maps.Marker({
-          position: {
-            lat: location.latitude,
-            lng: location.longitude
-          },
-          map: mapa,
-          title: location.titulo
-        });
+    const estacionamentos = <?php echo json_encode($estacionamentos); ?>;
 
-        marker.addListener('click', () => {
-          exibirModal(location);
-        });
+    estacionamentos.forEach(estacionamento => {
+      const marker = new google.maps.Marker({
+        position: {
+          lat: parseFloat(estacionamento.latitude),
+          lng: parseFloat(estacionamento.longitude)
+        },
+        map: mapa,
+        title: estacionamento.nome
       });
 
-      // Adicionar marcadores e eventos de clique
-      localizacoes.forEach(localizacao => {
-        const marcador = new google.maps.Marker({
-          position: localizacao.posicao,
-          map: mapa,
-          title: localizacao.titulo
-
-        });
-
-        marcador.addListener('click', () => {
-          exibirModal(localizacao);
-        });
+      marker.addListener('click', () => {
+        exibirModal(estacionamento);
       });
+    });
 
-      // Função para exibir o modal com as informações do local
-      function exibirModal(localizacao) {
-        document.getElementById('modal-titulo').textContent = localizacao.titulo;
-        document.getElementById('modal-vagas').textContent = 'Total de Vagas: ' + localizacao.vagas;
-        document.getElementById('modal-vagas_disponiveis').textContent = 'Vagas Disponíveis: ' + localizacao.vagas_disponiveis;
-        document.getElementById('modal-endereco').textContent = 'Endereço: ' + localizacao.endereco;
-        $('#meuModal').modal('show');
-      }
-
+    function exibirModal(estacionamento) {
+      document.getElementById('modal-titulo').textContent = estacionamento.nome;
+      document.getElementById('modal-vagas').textContent = 'Total de Vagas: ' + estacionamento.vagas;
+      document.getElementById('modal-vagas_disponiveis').textContent = 'Vagas Disponíveis: ' + estacionamento.vagas;
+      document.getElementById('modal-endereco').textContent = 'Endereço: ' + estacionamento.endereco;
+      $('#meuModal').modal('show');
     }
-  </script>
+  }
+</script>
+
   <link rel="stylesheet" href="../css/estacionamento.css">
 </head>
 
 <body>
-  
+
   <!--The div element for the map -->
   <div id="map"></div>
 

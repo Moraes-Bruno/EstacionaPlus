@@ -26,7 +26,7 @@
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                     <i class="fas fa-minus"></i>
                 </button>
-                <a class="btn btn-primary btn-sm" href="/admin/estacionamentos/adicionar">
+                <a class="btn btn-primary btn-sm" href="{{ route('estacionamento.form')}}">
                     <i class="fas fa-car-side"></i> <b>+</b>
                 </a>
             </div>
@@ -56,61 +56,51 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php
-                    require app_path('/Classes/Estacionamentos.php');
+                    @foreach ($estacionamentos as $estacionamento)
+                    <tr>
+                        <td>
+                            <a>
+                                {{ $estacionamento->nome }}
+                            </a>
+                        </td>
+                        <td>
+                            <a>
+                                {{ $estacionamento->endereco }}
+                            </a>
+                        </td>
+                        <td>
+                            <a>
+                                {{ $estacionamento->latitude }}
+                            </a>
+                        </td>
+                        <td>
+                            <a>
+                                {{ $estacionamento->longitude }}
+                            </a>
+                        </td>
+                        <td>
+                            <a>
+                                {{ $estacionamento->vagas }}
+                            </a>
+                        </td>
+                        <td class="project-actions text-right">
+                            <div class="btn-group" role="group" aria-label="Ações">
+                                <a class="btn btn-warning btn-sm mx-1" href="{{ route('estacionamento.detalhes', $estacionamento->_id) }}">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                                <a class="btn btn-info btn-sm mx-1" href="{{ route('estacionamento.form', $estacionamento->_id) }}">
+                                    <i class="fas fa-pencil-alt"></i>
+                                    Editar
+                                </a>
+                                <a class="btn btn-danger btn-sm mx-1" href="{{ route('estacionamento.excluir', $estacionamento->_id) }}" onclick="return confirm('Tem certeza que deseja excluir esse estacionamento?')">
+                                <i class="fas fa-trash"></i>
+                                        Excluir
+                                </a>
+                            </div>
+                        </td>
 
-                    $estacionamento = new Estacionamento;
-
-                    $estacionamentos = $estacionamento->listar();
-                    foreach ($estacionamentos as $key => $estacionamento) { ?>
-                        <tr>
-                            <td>
-                                <a>
-                                    <?= $estacionamento['titulo'] ?>
-                                </a>
-                            </td>
-                            <td>
-                                <a>
-                                    <?= $estacionamento['endereco'] ?>
-                                </a>
-                            </td>
-                            <td>
-                                <a>
-                                    <?= $estacionamento['latitude'] ?>
-                                </a>
-                            </td>
-                            <td>
-                                <a>
-                                    <?= $estacionamento['longitude'] ?>
-                                </a>
-                            </td>
-                            <td>
-                                <a>
-                                    <?= $estacionamento['vagas'] ?>
-                                </a>
-                            </td>
-                            <td class="project-actions text-right">
-                                <div class="btn-group" role="group" aria-label="Ações">
-                                    <a class="btn btn-warning btn-sm mx-1" href="/admin/estacionamentos/detalhes?estacionamento=<?= $estacionamento['id'] ?>">
-                                        <i class="fas fa-eye"></i>
-                                    </a>
-                                    <a class="btn btn-info btn-sm mx-1" href="/admin/estacionamentos/alterar?estacionamento=<?= $estacionamento['id'] ?>">
-                                        <i class="fas fa-pencil-alt"></i>
-                                        Editar
-                                    </a>
-                                    <form action="{{ route('estacionamento.excluir') }}" method="post">
-                                        @csrf
-                                        <input type="hidden" name="id" id="id" value="<?= $estacionamento['id'] ?>">
-                                        <button class="btn btn-danger btn-sm mx-1" type="submit">
-                                            <i class="fas fa-trash"></i>
-                                            Excluir
-                                        </button>
-                                    </form>
-                                </div>
-                            </td>
-
-                        </tr>
-                    <?php } ?>
+                    </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

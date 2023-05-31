@@ -314,7 +314,7 @@ return [
                 [
                     'text' => 'Adicionar',
                     'icon' => 'fas fa-plus',
-                    'url'  => '/admin/estacionamentos/adicionar',
+                    'url'  =>  '/admin/estacionamentos/form',
                 ],
             ],
         ],
@@ -330,7 +330,7 @@ return [
                 [
                     'text' => 'Adicionar',
                     'icon' => 'fas fa-plus',
-                    'url'  => '/admin/usuarios/adicionar',
+                    'url'  => '/admin/usuarios/form',
                 ],
             ],
         ],

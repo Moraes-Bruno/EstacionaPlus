@@ -2,89 +2,54 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Estacionamento;
+use App\Models\Usuário;
 use Illuminate\Http\Request;
-use MongoDB\Driver\Manager;
-use MongoDB\Driver\Query;
-use MongoDB\BSON\ObjectID;
 
 class UsuarioController extends Controller
 {
-    private $manager;
-
-    public function __construct()
+    public function usuarios_form($_id = false)
     {
-        // Set up the MongoDB connection
-        $this->manager = new Manager(env('DB_URI'));
+        $estacionamentos = Estacionamento::all();
+        if($_id){
+            $dados = Usuário::findOrFail($_id);
+            return view('usuarios_form', compact('dados'), compact('estacionamentos'));
+        }
+        else{
+            return view('usuarios_form', compact('estacionamentos'));
+        }
     }
     public function inserir(Request $request)
     {
-        $nome = $request->input('nome');
-        $email = $request->input('email');
-        $senha = $request->input('senha');
-        $favoritos = $request->input('favoritos');
-
-        $bulkWrite = new \MongoDB\Driver\BulkWrite();
-
-        // Define the document to be inserted
-        $document = [
-            'nome' => $nome,
-            'email' => $email,
-            'senha' => $senha,
-            'favoritos' => $favoritos,
-        ];
-
-        // Insert the document into the 'EstacionaMais.Estacionamentos' collection
-        $bulkWrite->insert($document);
-        $this->manager->executeBulkWrite('EstacionaMais.Usuarios', $bulkWrite);
-        return redirect()->route('admin.usuarios');
+        $dados = new Usuário($request->all());
+        $dados->save();
+        return redirect()->route('usuarios.listar');
     }
-    public function alterar(Request $request)
+
+    public function listar()
     {
-        // Obter os dados do formulário
-        $id = $request->input('id');
-        $novosValores = [
-            'nome' => $request->input('nome'),
-            'email' => $request->input('email'),
-            'senha' => $request->input('senha'),
-            'favoritos' => $request->input('favoritos'),
-        ];
-        $objectId = new ObjectID($id);
-
-        // Define o filtro com base no ID
-        $filter = ['_id' => $objectId];
-
-        // Define as atualizações a serem aplicadas
-        $update = ['$set' => $novosValores];
-
-        // Define as opções da atualização
-        $options = ['multi' => false];
-
-        // Cria um objeto de atualização
-        $updateQuery = new \MongoDB\Driver\BulkWrite();
-        $updateQuery->update($filter, $update, $options);
-
-        // Executa a atualização
-        $this->manager->executeBulkWrite('EstacionaMais.Usuarios', $updateQuery);
-
-        return redirect()->route('admin.usuarios');
+        $usuarios = Usuário::all();
+        return view('exibir_usuarios', compact('usuarios'));
     }
-    public function excluir(Request $request)
+    public function listar_um($id)
     {
-        // Obter os dados do formulário
-        $id = $request->input('id');
-
-        $objectId = new ObjectID($id);
-
-        // Define o filtro com base no ID
-        $filter = ['_id' => $objectId];
-
-        // Cria um objeto de atualização
-        $delete = new \MongoDB\Driver\BulkWrite();
-        $delete->delete($filter);
-
-        // Executa a atualização
-        $this->manager->executeBulkWrite('EstacionaMais.Usuarios', $delete);
-
-        return redirect()->route('admin.usuarios');
+        $dados = Usuário::findOrFail($id);
+        return view('detalhes_usuario', compact('dados'));
     }
+    public function alterar(Request $request, $id)
+    {
+        $dados = Usuário::findOrFail($id);
+        $dados->nome = $request->nome;
+        $dados->email = $request->email;
+        $dados->senha = $request->senha;
+        $dados->favoritos = $request->favoritos;
+        $dados->save();
+        return redirect()->route('usuarios.listar');
+    }
+    public function excluir($id)
+    {
+        $dados = Usuário::destroy($id);
+        return redirect()->route('usuarios.listar');
+    }
+
 }

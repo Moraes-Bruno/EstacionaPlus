@@ -26,7 +26,7 @@
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                     <i class="fas fa-minus"></i>
                 </button>
-                <a class="btn btn-primary btn-sm" href="/admin/usuarios/adicionar">
+                <a class="btn btn-primary btn-sm" href="{{ route('usuario.form')}}">
                     <i class="fas fa-user-plus">
                     </i>
                 </a>
@@ -51,50 +51,44 @@
                     </tr>
                 </thead>
                 <tbody>
-                <?php
-                    require app_path('/Classes/Usuario.php');
-
-                    $usuario = new Usuario;
-
-                    $usuarios = $usuario->listar();
-                    foreach ($usuarios as $key => $usuario) { ?>
+                @foreach ($usuarios as $usuario)
                     <tr>
                         <td>
                             <a>
-                            <?= $usuario['nome'] ?>
+                            {{ $usuario->nome }}
                             </a>
                         </td>
                         <td>
                             <a>
-                            <?= $usuario['email'] ?>
+                            {{ $usuario->email }}
                             </a>
                         </td>
                         <td>
                             <a>
-                            <?= $usuario['favoritos'] ?>
+                                @if($usuario->favoritos!=NULL)
+                                {{ count($usuario->favoritos) }}
+                                @else
+                                    0
+                                @endif
                             </a>
                         </td>
                         <td class="project-actions text-right">
-                                <div class="btn-group" role="group" aria-label="Ações">
-                                    <a class="btn btn-warning btn-sm mx-1" href="/admin/usuarios/detalhes?usuario=<?= $usuario['id'] ?>">
-                                        <i class="fas fa-eye"></i>
-                                    </a>
-                                    <a class="btn btn-info btn-sm mx-1" href="/admin/usuarios/alterar?usuario=<?= $usuario['id'] ?>">
-                                        <i class="fas fa-pencil-alt"></i>
-                                        Editar
-                                    </a>
-                                    <form action="{{ route('usuario.excluir') }}" method="post">
-                                        @csrf
-                                        <input type="hidden" name="id" id="id" value="<?= $usuario['id'] ?>">
-                                        <button class="btn btn-danger btn-sm mx-1" type="submit">
-                                            <i class="fas fa-trash"></i>
-                                            Excluir
-                                        </button>
-                                    </form>
-                                </div>
-                            </td>
+                            <div class="btn-group" role="group" aria-label="Ações">
+                                <a class="btn btn-warning btn-sm mx-1" href="{{ route('usuario.detalhes', $usuario->_id) }}">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                                <a class="btn btn-info btn-sm mx-1" href="{{ route('usuario.form', $usuario->_id) }}">
+                                    <i class="fas fa-pencil-alt"></i>
+                                    Editar
+                                </a>
+                                <a class="btn btn-danger btn-sm mx-1" href="{{ route('usuario.excluir', $usuario->_id) }}" onclick="return confirm('Tem certeza que deseja excluir esse usuário?')">
+                                <i class="fas fa-trash"></i>
+                                        Excluir
+                                </a>
+                            </div>
+                        </td>
                     </tr>
-                    <?php } ?>
+                    @endforeach
                 </tbody>
             </table>
         </div>

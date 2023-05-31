@@ -15,15 +15,6 @@
 </section>
 @endsection
 @section('content')
-<?php
-$id = $_GET['usuario'];
-
-require app_path('/Classes/Usuario.php');
-
-$u = new Usuario;
-
-$usuario = $u->listar_especifico($id);
-?>
 <!-- Main content -->
 <section class="content">
 
@@ -43,9 +34,9 @@ $usuario = $u->listar_especifico($id);
                 <div class="col-6 col-lg-8 order-2 order-md-1">
                     <div class="row">
                         <div class="col-12">
-                            <h4><?= $usuario->nome ?></h4>
+                            <h4>{{ $dados->nome }}</h4>
                             <div class="post">
-                                <a href="#"><?= $usuario->email ?></a>
+                                <a href="#">{{ $dados->email }}</a>
                             </div>
                         </div>
                     </div>
@@ -54,27 +45,27 @@ $usuario = $u->listar_especifico($id);
                 <div class="col-6 col-lg-4 order-1 order-md-2">
                     <h4>Favoritos</h4>
                     <ul class="list-unstyled">
-                        <?php $fav = $usuario->favoritos;
-                        foreach ($fav as $favorito) { ?>
-                            <li>
-                                <a href="" class="btn-link text-secondary"> <small><i class="fas fa-heart">
-                                        </i></small> <?= $favorito ?> </a>
-                            </li>
-                        <?php } ?>
+
+                        @if($dados->favoritos!=NULL)
+                        @foreach ( $dados->favoritos as $favorito)
+                        <li>
+                            <a href="" class="btn-link text-secondary"> <small><i class="fas fa-heart">
+                                    </i></small> {{ $favorito }} </a>
+                        </li>
+                        @endforeach
+                        @else
+                        <p class="text-muted">Esse usuário não possui favoritos.</p>
+                        @endif
                     </ul>
                     <div class="btn-group" role="group" aria-label="Ações">
-                        <a class="btn btn-info btn-sm mx-1" href="/admin/usuarios/alterar?usuario=<?= $id ?>">
+                        <a class="btn btn-info btn-sm mx-1" href="{{ route('usuario.form', $dados->_id) }}">
                             <i class="fas fa-pencil-alt"></i>
                             Editar
                         </a>
-                        <form action="{{ route('usuario.excluir') }}" method="post">
-                            @csrf
-                            <input type="hidden" name="id" id="id" value="<?= $id ?>">
-                            <button class="btn btn-danger btn-sm mx-1" type="submit">
-                                <i class="fas fa-trash"></i>
-                                Excluir
-                            </button>
-                        </form>
+                        <a class="btn btn-danger btn-sm mx-1" href="{{ route('usuario.excluir', $dados->_id) }}" onclick="return confirm('Tem certeza que deseja excluir esse usuário?')">
+                            <i class="fas fa-trash"></i>
+                            Excluir
+                        </a>
                     </div>
                 </div>
             </div>
