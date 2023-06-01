@@ -5,6 +5,8 @@ use App\Http\Controllers\VagaController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EstacionamentoController;
 use App\Http\Controllers\UsuarioController;
+use Illuminate\Support\Facades\Session;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,7 +20,7 @@ use App\Http\Controllers\UsuarioController;
 
 
 
-Route::get('/', [EstacionamentoController::class, 'show']);
+Route::get('/', [EstacionamentoController::class, 'show'])->name('index');
 Route::get('/admin', [AdminController::class, 'show']);
 Route::get('/admin/usuarios', [UsuarioController::class, 'listar'])->name('usuarios.listar');
 Route::post('/admin/usuarios/inserir', [UsuarioController::class, 'inserir'])->name('usuario.inserir');
@@ -32,4 +34,11 @@ Route::get('/admin/estacionamentos/form/{_id?}', [EstacionamentoController::clas
 Route::put('/admin/estacionamentos/alterar/{_id}', [EstacionamentoController::class, 'alterar'])->name('estacionamento.alterar');
 Route::get('/admin/estacionamentos/excluir/{_id}', [EstacionamentoController::class, 'excluir'])->name('estacionamento.excluir');
 Route::get('/admin/estacionamentos/detalhes/{_id}', [EstacionamentoController::class, 'listar_um'])->name('estacionamento.detalhes');
+
+Route::view('/cadUsuario','cadUsuario');//lnk para a pagina de cadastro
+Route::post('/cadUsuario', [UsuarioController::class, 'inserirUser'])->name('usuario.inserirUser');//cadastra Usuario
+route::view('/login','login');//link para a pagina de login
+Route::post('/login', [UsuarioController::class, 'userLogin'])->name('usuario.userLogin');//Login de Usuario
+Route::get('/index2', [EstacionamentoController::class, 'showIndex2'])->name('index2');//Redireciona para o index2
+
 
