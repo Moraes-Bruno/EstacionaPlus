@@ -37,8 +37,12 @@ Route::get('/admin/estacionamentos/detalhes/{_id}', [EstacionamentoController::c
 
 Route::view('/cadUsuario','cadUsuario');//lnk para a pagina de cadastro
 Route::post('/cadUsuario', [UsuarioController::class, 'inserirUser'])->name('usuario.inserirUser');//cadastra Usuario
-route::view('/login','login');//link para a pagina de login
+route::view('/login','login')->name('login');//link para a pagina de login
 Route::post('/login', [UsuarioController::class, 'userLogin'])->name('usuario.userLogin');//Login de Usuario
-Route::get('/index2', [EstacionamentoController::class, 'showIndex2'])->name('index2');//Redireciona para o index2
+Route::get('/index2', [UsuarioController::class, 'showIndex2'])->name('index2');//Redireciona para o index 2
+Route::get('/logout', [UsuarioController::class, 'logout'])->name('logout');//Faz o logout do usuario
+Route::get('/userInfo',  [UsuarioController::class, 'showProfile'])->name('userProfile');
+
+
 
 

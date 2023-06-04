@@ -1,5 +1,12 @@
+<?php
+use App\Models\Usuário;
+
+$user_id = session('user_id');
+$user =   Usuário::where('email', $user_id)->first();
+
+?>
 <!doctype html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="utf-8">
@@ -29,14 +36,19 @@
                         <a class="nav-link" aria-current="page" href="#">Mapa</a>
                     </li>
                 </ul>
-                <div class="d-flex">
-                    <p class="text-light">Nome Usuario</p>
-                </div>
-            </div>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <?php echo $user->nome?>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                      <a href="{{ route('userProfile') }}" class="dropdown-item" >Meu Perfil</a>
+                      <a href="{{ route('logout') }}" class="dropdown-item" >Sair</a>
+                    </div>
+                  </div>
         </div>
     </nav>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
-        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" 
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
         integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"

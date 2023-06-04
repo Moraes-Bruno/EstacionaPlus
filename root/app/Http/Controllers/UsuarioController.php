@@ -5,10 +5,21 @@ namespace App\Http\Controllers;
 use App\Models\Estacionamento;
 use App\Models\Usuário;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
+
+
+
+
 
 
 class UsuarioController extends Controller
 {
+ 
+    public function showLogin()
+    {
+        return view('login');
+    }
 
     public function usuarios_form($_id = false)
     {
@@ -25,6 +36,7 @@ class UsuarioController extends Controller
     //metodo usado pelo adminin para cadastar
     public function inserir(Request $request)
     {
+
         $dados = new Usuário($request->all());
         $dados->save();
         return redirect()->route('usuarios.listar');
@@ -33,6 +45,17 @@ class UsuarioController extends Controller
     //Metodo usado pelo usuario para se cadastrar
     public function inserirUser(Request $request)
     {
+        $request->validate([
+            'nome' => 'required',
+            'email' => 'required|email',
+            'senha' => 'required'
+        ], [
+            'nome.required' => 'o campo nome é obrigatório',
+            'email.required' => 'O campo de email é obrigatório',
+            'email.email' => 'Este campo deve possuir um email válido',
+            'senha.required' => 'O campo senha é obrigatório'
+        ]);
+
         // Verificar se o email já está cadastrado
         $email = $request->input('email');
         $usuarioExistente = Usuário::where('email', $email)->first();
@@ -49,8 +72,6 @@ class UsuarioController extends Controller
         return redirect()->route('index');
     }
     
-    
-
     public function listar()
     {
         $usuarios = Usuário::all();
@@ -78,31 +99,64 @@ class UsuarioController extends Controller
     }
 
     public function userLogin(Request $request)
+{
+    $request->validate([
+        'email' => 'required|email',
+        'senha' => 'required'
+    ], [
+        'email.required' => 'O campo de email é obrigatório',
+        'email.email' => 'Este campo deve possuir um email válido',
+        'senha.required' => 'O campo senha é obrigatório'
+    ]);
+
+    $email = $request->input('email');
+    $senha = $request->input('senha');
+
+    // Perform the login logic here
+    // You can use the $email and $senha variables to authenticate the user
+
+    // Example login logic:
+    $user = Usuário::where('email', $email)->first();
+
+    if ($user && $user->senha === $senha) {
+        
+        // Login successful
+        // Store the user's authentication status in the session
+        $request->session()->put('user_id', $user->email);
+        
+        return redirect()->route('index2');
+    } else {
+        // Login failed
+        return redirect()->back()->with('login_failed', true);
+    }
+ }
+
+    public function logout(){
+        Auth::logout();
+        return redirect()->route('index');
+    }
+
+    public function showIndex2()
     {
-        $email = $request->input('email');
-        $senha = $request->input('senha');
-    
-        // Perform the login logic here
-        // You can use the $email and $senha variables to authenticate the user
-    
-        // Example login logic:
-        $user = Usuário::where('email', $email)->first();
-    
-        if ($user && $user->senha === $senha) {
-            
-            // Login successful
-            // Store the user's authentication status in the session
-            $request->session()->put('user_id', $user->email);
-            
-            return redirect()->route('index2');
+
+        if (session('user_id')) {
+            $estacionamentos = Estacionamento::all();
+            return view('index2', ['estacionamentos' => $estacionamentos]);
         } else {
-            // Login failed
-            return redirect()->back()->with('login_failed', true);
+            return redirect()->route('login');
+        }
+       
+    }
+
+    public function showProfile(){
+        if (session('user_id')) {
+            return view('userInfo');
+        } else {
+            return redirect()->route('login');
         }
     }
+
+   
+
     
-
-
-
-
 }

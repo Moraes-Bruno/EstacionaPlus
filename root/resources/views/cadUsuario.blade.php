@@ -26,14 +26,23 @@
             <div class="mb-3">
               <label for="nome" class="form-label">Nome</label>
               <input type="text" class="form-control" name="nome" id="nome" aria-describedby="emailHelp">
+              @error('nome')
+                <span>{{$message}}</span>
+              @enderror
             </div>
             <div class="mb-3">
               <label for="email" class="form-label">Email</label>
               <input type="text" class="form-control" name="email" id="email">
+              @error('email')
+              <span>{{$message}}</span>
+            @enderror
             </div>
             <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">Senha</label>
                 <input type="password" class="form-control" name="senha" id="senha">
+                @error('senha')
+                <span>{{$message}}</span>
+              @enderror
               </div>
             <div class="d-flex flex-row justify-content-between">
                 <a href="./" class="btn btn-secondary">Cancelar</a>

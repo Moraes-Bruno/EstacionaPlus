@@ -20,26 +20,30 @@
     <div class="container mt-5">
 
         <h1 class="text-center">Login</h1>
-        <form class="w-50 m-auto" action="{{ route('usuario.userLogin') }}" method="post">
+        <form class="w-50 m-auto" action="{{ route('usuario.userLogin')}}" method="post">
             @csrf
             <div class="mb-3">
               <label for="email" class="form-label">Email</label>
-              <input type="text" class="form-control" name="email" id="email">
+              <input type="email" class="form-control" name="email" id="email">
+              @error('email')
+                <span>{{$message}}</span>
+              @enderror
             </div>
             <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">Senha</label>
                 <input type="password" class="form-control" name="senha" id="senha">
+                @error('senha')
+                <span>{{$message}}</span>
+              @enderror
               </div>
             <div class="d-flex flex-row justify-content-between">
                 <a href="./" class="btn btn-secondary">Cancelar</a>
                 <input type="submit" value="Login" class="btn btn-success ">
             </div>
           </form>
-        @if (session('login_failed'))
-            <script>
-                window.alert("Usuario não encontrado");
-            </script>
-        @endif
+       @error('error')
+          <span>{{$message}}</span>
+       @enderror
 
     </div>  
 
