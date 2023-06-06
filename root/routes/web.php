@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Session;
 
 Route::get('/', [EstacionamentoController::class, 'show'])->name('index');
 
-Route::group(['middleware' => 'checkUserSession'], function () {
+Route::group(['middleware' => 'checkUserSession'], function () {//Checa se ha uma session ativa
     Route::get('/admin', [AdminController::class, 'show']);
     Route::get('/admin/usuarios', [UsuarioController::class, 'listar'])->name('usuarios.listar');
     Route::post('/admin/usuarios/inserir', [UsuarioController::class, 'inserir'])->name('usuario.inserir');
@@ -39,7 +39,8 @@ Route::group(['middleware' => 'checkUserSession'], function () {
     Route::get('/index2', [UsuarioController::class, 'showIndex2'])->name('index2');//Redireciona para o index 2
     Route::get('/logout', [UsuarioController::class, 'logout'])->name('logout');//Faz o logout do usuario
     Route::get('/userInfo',  [UsuarioController::class, 'showProfile'])->name('userProfile');
-});//Checa se ha uma session ativa
+    Route::post('/userInfo', [UsuarioController::class, 'alterarUser'])->name('usuario.alterarUser');
+});
 
 //Processo de Cadastro/login de Usuario
 Route::view('/cadUsuario','cadUsuario');//link para a pagina de cadastro

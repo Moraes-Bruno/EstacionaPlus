@@ -8,11 +8,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 
-
-
-
-
-
 class UsuarioController extends Controller
 {
  
@@ -82,7 +77,7 @@ class UsuarioController extends Controller
         $dados = Usuário::findOrFail($id);
         return view('detalhes_usuario', compact('dados'));
     }
-    public function alterar(Request $request, $id)
+    public function alterar(Request $request, $id)//Função do painel do admin
     {
         $dados = Usuário::findOrFail($id);
         $dados->nome = $request->nome;
@@ -92,6 +87,16 @@ class UsuarioController extends Controller
         $dados->save();
         return redirect()->route('usuarios.listar');
     }
+
+    public function alterarUser(Request $request)//Função para o usuario alterar as suas informações
+    {
+        $dados = Usuário::where('email', $request->input('email'))->first();
+        $dados->nome = $request->nome;
+        $dados->senha = $request->senha;
+        $dados->save();
+        return redirect()->route('userProfile');
+    }
+
     public function excluir($id)
     {
         $dados = Usuário::destroy($id);

@@ -25,12 +25,12 @@ $user =   Usuário::where('email', $user_id)->first();
     <main class="container mt-5">
 
         <h1 class="text-center">Meu Perfil</h1>
-        <form class="w-50 m-auto" action="#" method="post">
+        <form class="w-50 m-auto" action="{{ route('usuario.alterarUser')}}" method="post">
             @csrf
             
             <div class="mb-3">
               <label for="nome" class="form-label">Nome</label>
-              <input type="text" class="form-control" name="nome" id="nome" aria-describedby="emailHelp" value="<?php echo $user->nome?>" readonly  >
+              <input type="text" class="form-control" name="nome" id="nome" aria-describedby="emailHelp" value="<?php echo $user->nome?>"   >
             </div>
             <div class="mb-3">
               <label for="email" class="form-label">Email</label>
@@ -38,10 +38,11 @@ $user =   Usuário::where('email', $user_id)->first();
             </div>
             <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">Senha</label>
-                <input type="text" class="form-control" name="senha" id="senha" value="<?php echo $user->senha?>" readonly  >
+                <input type="text" class="form-control" name="senha" id="senha" value="<?php echo $user->senha?>"   >
               </div>
+              <input type="submit" value="Alterar" class="btn btn-success w-100 mt-2">
           </form>
-          <h2 class="text-center mt-2">Favoritos</h2>
+          <h2 class="text-center mt-4 mb-4">Favoritos</h2>
 
           <div class="accordion mt-2 w-50 m-auto" id="accordionExample">
             <?php $contador = 1; ?>
