@@ -139,21 +139,15 @@ class UsuarioController extends Controller
     public function showIndex2()
     {
 
-        if (session('user_id')) {
+        
             $estacionamentos = Estacionamento::all();
             return view('index2', ['estacionamentos' => $estacionamentos]);
-        } else {
-            return redirect()->route('login');
-        }
+       
        
     }
 
     public function showProfile(){
-        if (session('user_id')) {
             return view('userInfo');
-        } else {
-            return redirect()->route('login');
-        }
     }
 
    
