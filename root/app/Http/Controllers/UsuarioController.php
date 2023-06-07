@@ -136,19 +136,17 @@ class UsuarioController extends Controller
     }
  }
 
-    public function logout(){
-        Auth::logout();
+    public function logout(Request $request){
+        $request->session()->forget('user_id');
+        $request->session()->flush();
+
         return redirect()->route('index');
     }
 
     public function showIndex2()
     {
-
-        
             $estacionamentos = Estacionamento::all();
             return view('index2', ['estacionamentos' => $estacionamentos]);
-       
-       
     }
 
     public function showProfile(){

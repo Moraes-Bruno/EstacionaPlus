@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Session;
 
 Route::get('/', [EstacionamentoController::class, 'show'])->name('index');
 
-Route::group(['middleware' => 'checkUserSession'], function () {//Checa se ha uma session ativa
+Route::group(['middleware' => 'checkAdminSession'], function () {//Session de Admin
     Route::get('/admin', [AdminController::class, 'show']);
     Route::get('/admin/usuarios', [UsuarioController::class, 'listar'])->name('usuarios.listar');
     Route::post('/admin/usuarios/inserir', [UsuarioController::class, 'inserir'])->name('usuario.inserir');
@@ -36,6 +36,9 @@ Route::group(['middleware' => 'checkUserSession'], function () {//Checa se ha um
     Route::put('/admin/estacionamentos/alterar/{_id}', [EstacionamentoController::class, 'alterar'])->name('estacionamento.alterar');
     Route::get('/admin/estacionamentos/excluir/{_id}', [EstacionamentoController::class, 'excluir'])->name('estacionamento.excluir');
     Route::get('/admin/estacionamentos/detalhes/{_id}', [EstacionamentoController::class, 'listar_um'])->name('estacionamento.detalhes');
+});
+
+Route::group(['middleware' => 'checkUserSession'], function () {//Session de Usuario
     Route::get('/index2', [UsuarioController::class, 'showIndex2'])->name('index2');//Redireciona para o index 2
     Route::get('/logout', [UsuarioController::class, 'logout'])->name('logout');//Faz o logout do usuario
     Route::get('/userInfo',  [UsuarioController::class, 'showProfile'])->name('userProfile');

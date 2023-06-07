@@ -13,7 +13,7 @@ class AdminController extends Controller
     {
         
 
-        if (session('user_id')) {
+        if (session('admin_authenticated')) {
             return view('admin');
         } else {
             return redirect()->route('index');
@@ -41,14 +41,13 @@ class AdminController extends Controller
     $user = Admin::where('email', $email)->first();
 
     if ($user && $user->senha === $senha) {
-        
-        // Login successful
-        // Store the user's authentication status in the session
-        $request->session()->put('user_id', $user->email);
+        // Login bem-sucedido
+        // Armazene o status de autenticação do admin na sessão
+        $request->session()->put('admin_authenticated', true);
         
         return redirect()->route('admin');
     } else {
-        // Login failed
+        // Login falhou
         return redirect()->back()->with('login_failed', true);
     }
  }
