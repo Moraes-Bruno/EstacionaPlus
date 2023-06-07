@@ -41,4 +41,5 @@ route::view('/login','login');//link para a pagina de login
 Route::post('/login', [UsuarioController::class, 'userLogin'])->name('usuario.userLogin');//Login de Usuario
 Route::get('/index2', [EstacionamentoController::class, 'showIndex2'])->name('index2');//Redireciona para o index2
 
+Route::view('/home','home'); 
 
