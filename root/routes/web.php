@@ -21,25 +21,41 @@ use Illuminate\Support\Facades\Session;
 
 
 Route::get('/', [EstacionamentoController::class, 'show'])->name('index');
-Route::get('/admin', [AdminController::class, 'show']);
-Route::get('/admin/usuarios', [UsuarioController::class, 'listar'])->name('usuarios.listar');
-Route::post('/admin/usuarios/inserir', [UsuarioController::class, 'inserir'])->name('usuario.inserir');
-Route::get('/admin/usuarios/form/{_id?}', [UsuarioController::class, 'usuarios_form'])->name('usuario.form');
-Route::put('/admin/usuarios/alterar/{_id}', [UsuarioController::class, 'alterar'])->name('usuario.alterar');
-Route::get('/admin/usuarios/excluir/{_id}', [UsuarioController::class, 'excluir'])->name('usuario.excluir');
-Route::get('/admin/usuarios/detalhes/{_id}', [UsuarioController::class, 'listar_um'])->name('usuario.detalhes');
-Route::get('/admin/estacionamentos', [EstacionamentoController::class, 'listar'])->name('estacionamentos.listar');
-Route::post('/admin/estacionamentos/inserir', [EstacionamentoController::class, 'inserir'])->name('estacionamento.inserir');
-Route::get('/admin/estacionamentos/form/{_id?}', [EstacionamentoController::class, 'estacionamentos_form'])->name('estacionamento.form');
-Route::put('/admin/estacionamentos/alterar/{_id}', [EstacionamentoController::class, 'alterar'])->name('estacionamento.alterar');
-Route::get('/admin/estacionamentos/excluir/{_id}', [EstacionamentoController::class, 'excluir'])->name('estacionamento.excluir');
-Route::get('/admin/estacionamentos/detalhes/{_id}', [EstacionamentoController::class, 'listar_um'])->name('estacionamento.detalhes');
 
-Route::view('/cadUsuario','cadUsuario');//lnk para a pagina de cadastro
+Route::group(['middleware' => 'checkAdminSession'], function () {//Session de Admin
+    Route::get('/admin', [AdminController::class, 'show']);
+    Route::get('/admin/usuarios', [UsuarioController::class, 'listar'])->name('usuarios.listar');
+    Route::post('/admin/usuarios/inserir', [UsuarioController::class, 'inserir'])->name('usuario.inserir');
+    Route::get('/admin/usuarios/form/{_id?}', [UsuarioController::class, 'usuarios_form'])->name('usuario.form');
+    Route::put('/admin/usuarios/alterar/{_id}', [UsuarioController::class, 'alterar'])->name('usuario.alterar');
+    Route::get('/admin/usuarios/excluir/{_id}', [UsuarioController::class, 'excluir'])->name('usuario.excluir');
+    Route::get('/admin/usuarios/detalhes/{_id}', [UsuarioController::class, 'listar_um'])->name('usuario.detalhes');
+    Route::get('/admin/estacionamentos', [EstacionamentoController::class, 'listar'])->name('estacionamentos.listar');
+    Route::post('/admin/estacionamentos/inserir', [EstacionamentoController::class, 'inserir'])->name('estacionamento.inserir');
+    Route::get('/admin/estacionamentos/form/{_id?}', [EstacionamentoController::class, 'estacionamentos_form'])->name('estacionamento.form');
+    Route::put('/admin/estacionamentos/alterar/{_id}', [EstacionamentoController::class, 'alterar'])->name('estacionamento.alterar');
+    Route::get('/admin/estacionamentos/excluir/{_id}', [EstacionamentoController::class, 'excluir'])->name('estacionamento.excluir');
+    Route::get('/admin/estacionamentos/detalhes/{_id}', [EstacionamentoController::class, 'listar_um'])->name('estacionamento.detalhes');
+});
+
+Route::group(['middleware' => 'checkUserSession'], function () {//Session de Usuario
+    Route::get('/index2', [UsuarioController::class, 'showIndex2'])->name('index2');//Redireciona para o index 2
+    Route::get('/logout', [UsuarioController::class, 'logout'])->name('logout');//Faz o logout do usuario
+    Route::get('/userInfo',  [UsuarioController::class, 'showProfile'])->name('userProfile');
+    Route::post('/userInfo', [UsuarioController::class, 'alterarUser'])->name('usuario.alterarUser');
+});
+
+//Processo de Cadastro/login de Usuario
+Route::view('/cadUsuario','cadUsuario');//link para a pagina de cadastro
 Route::post('/cadUsuario', [UsuarioController::class, 'inserirUser'])->name('usuario.inserirUser');//cadastra Usuario
-route::view('/login','login');//link para a pagina de login
+route::view('/login','login')->name('login');//link para a pagina de login
 Route::post('/login', [UsuarioController::class, 'userLogin'])->name('usuario.userLogin');//Login de Usuario
-Route::get('/index2', [EstacionamentoController::class, 'showIndex2'])->name('index2');//Redireciona para o index2
+
+//Processo de Login do Admin
+Route::view('/adminLogin','adminLogin')->name('adminLogin');
+Route::post('/adminLogin',[AdminController::class, 'adminLogin'])->name('admin.adminLogin');
+Route::get('/admin',[AdminController::class, 'show'])->name('admin');
+
 
 Route::view('/home','home'); 
 
