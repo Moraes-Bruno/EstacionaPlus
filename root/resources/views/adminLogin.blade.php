@@ -14,28 +14,17 @@
 
 </head>
 <body class="pt-5 bg-light">
-
-        @include('navbar')
-
     <div class="container mt-5">
 
-        <h1 class="text-center">Cadastro</h1>
-        <form class="w-50 m-auto" action="{{ route('usuario.inserirUser') }}" method="post">
+        <h1 class="text-center">Login</h1>
+        <form class="w-50 m-auto" action="{{ route('admin.adminLogin')}}" method="post">
             @csrf
-            
-            <div class="mb-3">
-              <label for="nome" class="form-label">Nome</label>
-              <input type="text" class="form-control" name="nome" id="nome" aria-describedby="emailHelp">
-              @error('nome')
-                <span>{{$message}}</span>
-              @enderror
-            </div>
             <div class="mb-3">
               <label for="email" class="form-label">Email</label>
-              <input type="text" class="form-control" name="email" id="email">
+              <input type="email" class="form-control" name="email" id="email">
               @error('email')
-              <span>{{$message}}</span>
-            @enderror
+                <span>{{$message}}</span>
+              @enderror
             </div>
             <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">Senha</label>
@@ -46,14 +35,12 @@
               </div>
             <div class="d-flex flex-row justify-content-between">
                 <a href="./" class="btn btn-secondary">Cancelar</a>
-                <input type="submit" value="Cadastrar" class="btn btn-success ">
+                <input type="submit" value="Login" class="btn btn-success ">
             </div>
           </form>
-        @if(session('email_cadastrado'))
-            <script>
-                window.alert('O email já está cadastrado.');
-            </script>
-        @endif
+       @error('error')
+          <span>{{$message}}</span>
+       @enderror
 
     </div>  
 

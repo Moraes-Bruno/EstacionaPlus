@@ -63,7 +63,7 @@
 </head>
 
 <body class="pt-4">
-
+  
   @include('navbarLogged')
 
   <!--The div element for the map -->
