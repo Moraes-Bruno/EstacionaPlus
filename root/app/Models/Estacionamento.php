@@ -14,11 +14,12 @@ class Estacionamento extends Eloquent
         'nome',
         'latitude',
         'longitude',
-        'vagas',
+        'totalVagas',
         'endereco',
         'tipo',
-        'totalX',
-        'totalY',
+        'vagas',
+        'tipoVagas',
+        'status',
 
     ];
 }

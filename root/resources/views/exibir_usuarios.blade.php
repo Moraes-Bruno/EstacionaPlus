@@ -6,7 +6,7 @@
     <div class="container-fluid mb-2">
         <div class="float-right">
             <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
                 <li class="breadcrumb-item active">Usuários</li>
             </ol>
         </div>

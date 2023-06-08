@@ -6,7 +6,7 @@
     <div class="container-fluid mb-2">
         <div class="float-right">
             <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
                 <li class="breadcrumb-item"><a href="/admin/estacionamentos">Estacionamentos</a></li>
                 <li class="breadcrumb-item active">Detalhes</li>
             </ol>
@@ -37,7 +37,7 @@
                         <h5>Endereço: <b>{{ $dados->endereco }}</b></h5>
                         <h5>Latitude: <b>{{ $dados->latitude }}</b></h5>
                         <h5>Longitude: <b>{{ $dados->longitude }}</b></h5>
-                        <h5>Total de vagas: <b>{{ $dados->vagas }}</b></h5>
+                        <h5>Total de vagas: <b>{{ $dados->totalVagas }}</b></h5>
                         <h5>Inclinação das vagas: "<b>{{ $dados->tipo }}</b>"</h5>
                         <h5>Total de vagas Horizontalmente: <b>{{ $dados->totalX }}</b></h5>
                         <h5>Total de vagas Verticalmente: <b>{{ $dados->totalY }}</b></h5>
