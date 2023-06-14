@@ -9,8 +9,13 @@ class EstacionamentoController extends Controller
 {
     public function show()
     {
+        return view('index');
+    }
+
+    public function showhome()
+    {
         $estacionamentos = Estacionamento::all();
-        return view('index', ['estacionamentos' => $estacionamentos]);
+        return view('home', ['estacionamentos' => $estacionamentos]);
     }
     
     public function estacionamentos_form($_id = false)

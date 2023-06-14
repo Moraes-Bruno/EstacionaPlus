@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Session;
 
 
 Route::get('/', [EstacionamentoController::class, 'show'])->name('index');
+Route::get('/home', [EstacionamentoController::class, 'showhome'])->name('home');
 
 Route::group(['middleware' => 'checkAdminSession'], function () {//Session de Admin
     Route::get('/admin', [AdminController::class, 'show']);
@@ -56,6 +57,4 @@ Route::view('/adminLogin','adminLogin')->name('adminLogin');
 Route::post('/adminLogin',[AdminController::class, 'adminLogin'])->name('admin.adminLogin');
 Route::get('/admin',[AdminController::class, 'show'])->name('admin');
 
-
-Route::view('/home','home'); 
 
