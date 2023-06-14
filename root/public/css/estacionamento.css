@@ -1,41 +1,55 @@
-#estacionamento {
-    width: 500px;
-    height: 200px;
-    padding: 5px;
-    margin: 25px;
-  }
-  
   .vaga {
-    width: 50px;
-    height: 100px;
-    border-top: 5px solid  grey;
-    border-left: 5px solid  grey;
-    border-right: 5px solid  grey;
+    width: 30px;
+    height: 60px;
+    padding: 0;
+    margin: 0;
+    border-top: 3px solid;
+    border-left: 3px solid;
+    border-right: 3px solid;
+  }
+  .vazio {
+    width: 30px;
+    height: 60px;
+    padding: 0;
+    margin: 0;
+  }
+  .vagacima {
+    width: 30px;
+    height: 60px;
+    border-bottom: 3px solid;
+    border-left: 3px solid;
+    border-right: 3px solid;
+  }
+  .objeto {
+    width: 30px;
+    height: 60px;
+    background-color: black;
+  }
+  .AnteriorVazio{
+    border-top: 6px solid;
+  }
+  table {
+    border-collapse: collapse;
   }
 
-  .vagacima {
-    width: 50px;
-    height: 100px;
-    border-bottom: 5px solid  grey;
-    border-left: 5px solid  grey;
-    border-right: 5px solid  grey;
+  td {
+    padding: 0;
+    margin: 0;
+  }
+  .ocupada{
+    background-color: rgba(196, 0, 0, 0.5);
+  }
+  .livre{
+    background-color: rgba(60, 255, 90, 0.5);
   }
 
   .ladoDireito{
-    border-right: 10px solid  grey;
+    border-right: 6px solid ;
   }
-  
+
   .ladoEsquerdo{
-    border-left: 10px solid  grey;
+    border-left: 6px solid ;
   }
-
-.quadro{
-    width: 1000px;
-    height: 700px;
-    margin: auto;
-    background-color: white;
-}
-
   /* Media Query para telas menores que 600px */
 @media (max-width: 500px) {
     #estacionamento {
@@ -43,7 +57,7 @@
       height: auto;
       padding: 0;
     }
-  
+
     .vaga,
     .vagacima {
       width: 100%;
@@ -52,7 +66,7 @@
       border-bottom: 5px solid grey;
       margin-bottom: 5px;
     }
-  
+
     .ladoDireito,
     .ladoEsquerdo {
       border: none;
