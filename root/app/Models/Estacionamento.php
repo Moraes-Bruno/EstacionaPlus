@@ -16,10 +16,8 @@ class Estacionamento extends Eloquent
         'longitude',
         'totalVagas',
         'endereco',
-        'tipo',
         'vagas',
         'tipoVagas',
         'status',
-
     ];
 }

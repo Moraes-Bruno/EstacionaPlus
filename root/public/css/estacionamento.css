@@ -1,4 +1,4 @@
-  .vaga {
+.vaga {
     width: 30px;
     height: 60px;
     padding: 0;
@@ -6,69 +6,80 @@
     border-top: 3px solid;
     border-left: 3px solid;
     border-right: 3px solid;
-  }
-  .vazio {
+}
+
+.vazio {
     width: 30px;
     height: 60px;
     padding: 0;
     margin: 0;
-  }
-  .vagacima {
+}
+
+.normal {
+    background-color: #88A0A8;
+    color: white;
+    /* Cor para vaga normal */
+}
+
+.deficiente {
+    background-color: #546A76;
+    color: white;
+    /* Cor para vaga de deficiente */
+}
+
+.idoso {
+    background-color: #334751;
+    color: white;
+    /* Cor para vaga de idoso */
+}
+
+.autista {
+    background-color: #B4656F;
+    color: white;
+    /* Cor para vaga de autista */
+}
+
+.vazio {
+    background-color: white;
+    /* Cor para vaga vazia */
+}
+
+.vagacima {
     width: 30px;
     height: 60px;
     border-bottom: 3px solid;
     border-left: 3px solid;
     border-right: 3px solid;
-  }
-  .objeto {
+}
+
+.objeto {
     width: 30px;
     height: 60px;
     background-color: black;
-  }
-  .AnteriorVazio{
-    border-top: 6px solid;
-  }
-  table {
-    border-collapse: collapse;
-  }
+}
 
-  td {
+.AnteriorVazio {
+    border-top: 6px solid;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+td {
     padding: 0;
     margin: 0;
-  }
-  .ocupada{
-    background-color: rgba(196, 0, 0, 0.5);
-  }
-  .livre{
-    background-color: rgba(60, 255, 90, 0.5);
-  }
+}
 
-  .ladoDireito{
-    border-right: 6px solid ;
-  }
+td {
+    padding: 0;
+    margin: 0;
+}
 
-  .ladoEsquerdo{
-    border-left: 6px solid ;
-  }
-  /* Media Query para telas menores que 600px */
-@media (max-width: 500px) {
-    #estacionamento {
-      width: 100%;
-      height: auto;
-      padding: 0;
-    }
+.ladoDireito {
+    border-right: 6px solid;
+}
 
-    .vaga,
-    .vagacima {
-      width: 100%;
-      height: 50px;
-      border: none;
-      border-bottom: 5px solid grey;
-      margin-bottom: 5px;
-    }
-
-    .ladoDireito,
-    .ladoEsquerdo {
-      border: none;
-    }
-  }
+.ladoEsquerdo {
+    border-left: 6px solid;
+}

@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 3',
+    'title' => 'EstacionaMais',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -107,7 +107,7 @@ return [
     */
 
     'preloader' => [
-        'enabled' => true,
+        'enabled' => false,
         'img' => [
             'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
             'alt' => 'AdminLTE Preloader Image',
@@ -333,22 +333,6 @@ return [
                     'url'  => '/admin/usuarios/form',
                 ],
             ],
-        ],
-        ['header' => 'RELATÓRIOS'],
-        [
-            'text'       => 'Diário',
-            'icon_color' => 'red',
-            'url'        => '#',
-        ],
-        [
-            'text'       => 'Semanal',
-            'icon_color' => 'yellow',
-            'url'        => '#',
-        ],
-        [
-            'text'       => 'Mensal',
-            'icon_color' => 'cyan',
-            'url'        => '#',
         ],
     ],
 

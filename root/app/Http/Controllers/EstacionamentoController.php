@@ -86,12 +86,32 @@ class EstacionamentoController extends Controller
         $dados->longitude = $request->longitude;
         $dados->totalVagas = $request->totalVagas;
         $dados->endereco = $request->endereco;
-        $dados->tipo = $request->tipo;
-        $dados->totalX = $request->totalX;
-        $dados->totalY = $request->totalY;
+
+        $vagas = [];
+
+        // Percorra os dados do formulário para extrair as informações das vagas
+        for ($i = 0; $i < 12; $i++) {
+            for ($j = 0; $j < 24; $j++) {
+                $index = "$i,$j";
+                $tipoVaga = $request->input("vagas.$index.Tipo");
+                $status = $request->input("vagas.$index.Status");
+                $vaga = [
+                    'Posição' => $index,
+                    'Tipo' => $tipoVaga,
+                    'Status' => $status,
+                ];
+                $vagas[$index] = $vaga;
+            }
+        }
+
+        // Adicione as informações das vagas aos dados do estacionamento
+        $dados->vagas = $vagas;
         $dados->save();
+
         return redirect()->route('estacionamentos.listar');
     }
+
+
     public function excluir($id)
     {
         $dados = Estacionamento::destroy($id);

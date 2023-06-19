@@ -12,4 +12,5 @@
 
 @section('css')
 <link rel="stylesheet" href="/css/admin_custom.css">
+@yield('css')
 @stop

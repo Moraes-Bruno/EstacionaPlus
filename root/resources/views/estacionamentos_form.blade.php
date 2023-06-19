@@ -59,12 +59,12 @@
         var nextIndex = (currentIndex + 1) % vagaTypes.length;
         var nextType = vagaTypes[nextIndex];
 
-        checkbox.closest('td').find('input[name^="tipoVaga"]').val(nextType);
+        checkbox.closest('td').find('input[id^="tipo"]').val(nextType);
         td.removeClass(vagaTypes.join(' ')).addClass(nextType.toLowerCase());
 
         if (currentType === "Objeto") {
             td.removeClass().data('vagaType', '');
-            checkbox.closest('td').find('input[name^="tipoVaga"]').val('Vazio');
+            checkbox.closest('td').find('input[id^="tipo"]').val('Vazio');
         } else {
             td.data('vagaType', nextType);
         }
@@ -182,21 +182,6 @@
                         <input type="number" id="totalVagas" name="totalVagas" class="form-control" value="{{ $dados->totalVagas }}">
                     </div>
                 </div>
-                <div class="form-group row">
-                    <div class="col-4">
-                        <b>
-                            <p>Tipo de vagas:</p>
-                        </b>
-                        <label for="normal">
-                            <div style="width:50px;height:80px;border-top: 5px solid  grey;border-left: 5px solid  grey; border-right: 5px solid  grey;"></div>
-                        </label>
-                        <input type="radio" class="mx-2" id="normal" value="normal" name="tipo" @if($dados->tipo == 'normal') checked @endif>
-                        <label for="torto">
-                            <div style="width:50px;height:80px;border-top: 5px solid  grey;border-left: 5px solid  grey; border-right: 5px solid  grey;transform: skew(14deg);"></div>
-                        </label>
-                        <input class="mx-2" type="radio" id="torto" value="torto" name="tipo" @if($dados->tipo == 'torto') checked @endif>
-                    </div>
-                </div>
                 <b>
                     <p>Modifique abaixo o layout do seu estacionamento:</p>
                 </b>
@@ -225,10 +210,13 @@
                         @for ($j = 0; $j < 24; $j++) <?php $index = "$i,$j"; ?> <td class="<?php echo strtolower($matrix[$i][$j]['Tipo']) ?>">
                             <div style="display: flex; justify-content: center;">
                                 <label for="vagas[]"></label>
-                                <input type="checkbox" id="vaga{{ $index }}" name="vagas[]" value="{{ $index }}" @if($matrix[$i][$j]["Tipo"] !="Vazio" ) checked @endif>
+                                <input type="checkbox" id="vaga{{ $index }}" name="vagas[]" value="{{ $index }}" @if($matrix[$i][$j]['Tipo'] !="Vazio" && $matrix[$i][$j]['Tipo'] != null) checked @endif>
                             </div>
-                            <input type="hidden" name="tipoVaga{{ $index }}" id="tipoVaga{{ $index }}" value="{{$matrix[$i][$j]['Tipo']}}">
+                            <input type="hidden" name="vagas[{{ $index }}][Posição]" id="posicao" value="{{ $index }}">
+                            <input type="hidden" name="vagas[{{ $index }}][Tipo]" id="tipo" value="{{ $matrix[$i][$j]['Tipo'] }}">
+                            <input type="hidden" name="vagas[{{ $index }}][Status]" id="status" value="{{ $matrix[$i][$j]['Status'] }}">
                             </td>
+
                             @endfor
                             </tr>
                             @endfor
@@ -279,21 +267,6 @@
                     <div class="col-2">
                         <label for="totalVagas">Total de Vagas:</label>
                         <input type="number" id="totalVagas" name="totalVagas" class="form-control">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-4">
-                        <b>
-                            <p>Tipo de vagas:</p>
-                        </b>
-                        <label for="normal">
-                            <div style="width:50px;height:80px;border-top: 5px solid  grey;border-left: 5px solid  grey; border-right: 5px solid  grey;"></div>
-                        </label>
-                        <input type="radio" value="normal" class="mx-2" id="normal" name="tipo">
-                        <label for="torto">
-                            <div style="width:50px;height:80px;border-top: 5px solid  grey;border-left: 5px solid  grey; border-right: 5px solid  grey;transform: skew(14deg);"></div>
-                        </label>
-                        <input class="mx-2" value="torto" type="radio" id="torto" name="tipo">
                     </div>
                 </div>
                 <b>

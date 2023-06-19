@@ -18,7 +18,7 @@
 
   <!-- Vendor CSS Files -->
   <link href="../css/aos/aos.css" rel="stylesheet">
-  <link href="../css/bootstrap/css/bootstrap.min.css" rel="stylesheet"> 
+  <link href="../css/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="../css/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
   <link href="../css/boxicons/css/boxicons.min.css" rel="stylesheet">
   <link href="../css/glightbox/css/glightbox.min.css" rel="stylesheet">
@@ -94,7 +94,7 @@
 
                 <p>Durante nosso percurso acadêmico, tivemos a oportunidade de trabalhar em diversos projetos desafiadores, mas o Projeto Integrador (PI) foi um marco em nossa jornada. Decidimos criar um site para o PI, que aborda um tema de grande relevância: um sistema de estacionamento inteligente.</P>
 
-                <p>Nosso objetivo com esse projeto é desenvolver soluções para os desafios enfrentados nos estacionamentos, buscando melhorar a eficiência e a experiência dos usuários. O estacionamento inteligente utiliza tecnologias como sensore e algoritmos avançados para otimizar o processo de estacionamento, reduzir o tempo de busca por vagas e evitar congestionamentos.</P>
+                <p>Nosso objetivo com esse projeto é desenvolver soluções para os desafios enfrentados nos estacionamentos, buscando melhorar a eficiência e a experiência dos usuários. O estacionamento inteligente utiliza tecnologias como sensores e algoritmos avançados para otimizar o processo de estacionamento, reduzir o tempo de busca por vagas e evitar congestionamentos.</P>
 
                 <p>Estamos comprometidos em fornecer um conteúdo de qualidade, embasado em pesquisas e estudos atualizados. Também estamos abertos a receber feedback e sugestões, pois acreditamos que a colaboração é fundamental para o aprimoramento contínuo do nosso projeto.</P>
 
@@ -126,7 +126,7 @@
               <div class="member-img">
                 <img src="../img/team/team-1.jpg" class="img-fluid" alt="">
                 <div class="social">
-              
+
                 <a href="https://github.com/AnaFMel"><i class="bi bi-github"></i></a>
                   <a href="https://instagram.com/anaaaaa_melo?igshid=MzNlNGNkZWQ4Mg=="><i class="bi bi-instagram"></i></a>
                   <a href="https://www.linkedin.com/in/anaclara-f-melo"><i class="bi bi-linkedin"></i></a>
@@ -144,7 +144,7 @@
               <div class="member-img">
                 <img src="../img/team/team-2.jpg" class="img-fluid" alt="">
                 <div class="social">
-                  
+
                 <a href="https://github.com/Moraes-Bruno"><i class="bi bi-github"></i></a>
                   <a href="https://www.instagram.com/moraes___bruno/"><i class="bi bi-instagram"></i></a>
                   <a href="https://www.linkedin.com/in/bruno-moraes-9b2383231"><i class="bi bi-linkedin"></i></a>
@@ -162,7 +162,7 @@
               <div class="member-img">
                 <img src="../img/team/team-3.jpg" class="img-fluid" alt="">
                 <div class="social">
-                
+
                 <a href="https://github.com/pedrocruzz"><i class="bi bi-github"></i></a>
                   <a href="https://instagram.com/_pedrocruz_?igshid=MzNlNGNkZWQ4Mg=="><i class="bi bi-instagram"></i></a>
                   <a href="https://www.linkedin.com/in/pedrocruzz"><i class="bi bi-linkedin"></i></a>
@@ -180,7 +180,7 @@
               <div class="member-img">
                 <img src="../img/team/team-4.jpg" class="img-fluid" alt="">
                 <div class="social">
-              
+
                   <a href="https://github.com/viniciusmattoss"><i class="bi bi-github"></i></a>
                   <a href="https://www.instagram.com/vinicius_h_l_mattos/"><i class="bi bi-instagram"></i></a>
                   <a href="#"><i class="bi bi-linkedin"></i></a>
@@ -256,13 +256,9 @@
 
   <!-- Template Main JS File -->
   <script src="../js/main.js"></script>
-
-<<<<<<< HEAD
-=======
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAtI-_4umSKFC-kkL4yNoUTRfBI-Qo0NDM&callback=initMap&v=weekly" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
->>>>>>> f9b25285a7d81f780d31f5a639ce8cb02b312a5e
 </body>
 
 </html>
