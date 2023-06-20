@@ -12,11 +12,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>EstacionaMais</title>
   <link rel="stylesheet" href="../css/index.css">
-
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <!-- Option 1: Include in HTML -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 
   <script>
   function initMap() {
@@ -59,6 +61,8 @@
   }
 </script>
 
+
+
   <link rel="stylesheet" href="../css/estacionamento.css">
 </head>
 
@@ -81,8 +85,8 @@
       <div class="modal-content quadro">
         <div class="modal-header">
           <h5 class="modal-title" id="modal-titulo"></h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-            <span aria-hidden="true">&times;</span>
+          <button type="button" class="btn btn-link favorite-btn" data-dismiss="modal" aria-label="Favoritar" name="favoritar">
+            <i id="favorite-icon" class="bi bi-star"></i>
           </button>
         </div>
         <div class="modal-body">
@@ -157,5 +161,32 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAtI-_4umSKFC-kkL4yNoUTRfBI-Qo0NDM&callback=initMap&v=weekly" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-</body>
+
+
+
+
+  <script>
+  $(function() {
+    $('button[name="favoritar"]').on('click', function() {
+      var nome = document.getElementById('modal-titulo').textContent;
+
+      $.ajax({
+        url: "{{ route('usuario.favoritar') }}",
+        type: "post",
+        data: {
+          _token: "{{ csrf_token() }}", // Inclua o token CSRF aqui
+          nome: nome
+        },
+        dataType: 'json',
+        success: function(response) {
+        window.alert(response.message); // Exibe a mensagem em um alerta
+      }
+      });
+    });
+  });
+</script>
+
+
+
+  </body>
 </html>

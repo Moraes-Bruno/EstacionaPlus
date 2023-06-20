@@ -43,7 +43,10 @@ Route::group(['middleware' => 'checkUserSession'], function () {//Session de Usu
     Route::get('/index2', [UsuarioController::class, 'showIndex2'])->name('index2');//Redireciona para o index 2
     Route::get('/logout', [UsuarioController::class, 'logout'])->name('logout');//Faz o logout do usuario
     Route::get('/userInfo',  [UsuarioController::class, 'showProfile'])->name('userProfile');
-    Route::post('/userInfo', [UsuarioController::class, 'alterarUser'])->name('usuario.alterarUser');
+    Route::post('/userInfo/alterar', [UsuarioController::class, 'alterarUser'])->name('usuario.alterarUser');
+    Route::post('/index2',  [UsuarioController::class, 'favoritar'])->name('usuario.favoritar');
+    Route::post('/userInfo',  [UsuarioController::class, 'removerFavorito'])->name('usuario.removerFavorito');
+
 });
 
 //Processo de Cadastro/login de Usuario
