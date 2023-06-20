@@ -68,7 +68,7 @@ $user = Usuário::where('email', $user_id)->first();
                             <div class="accordion-body">
                                 <?php $dados = Estacionamento::where('nome', $favorito)->first(); ?>
                                 <p id="nomeE_{{ $contador }}" class="d-none">{{ $dados->nome }}</p>
-                                <p>Quantidade de vagas: {{ $dados->vagas }}</p>
+                                <p>Quantidade de vagas: {{ $dados->totalVagas }}</p>
                                 <p>Endereço: {{ $dados->endereco }}</p>
                                 <button class="btn btn-primary w-100" name="remover"
                                     data-nome="{{ $dados->nome }}">Remover</button>
