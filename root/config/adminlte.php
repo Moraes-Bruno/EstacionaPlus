@@ -64,11 +64,11 @@ return [
     */
 
     'logo' => 'Estaciona+',
-    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
-    'logo_img_class' => 'brand-image img-circle elevation-3',
-    'logo_img_xl' => null,
-    'logo_img_xl_class' => 'brand-image-xs',
-    'logo_img_alt' => 'Admin Logo',
+    //'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+    //'logo_img_class' => 'brand-image img-circle elevation-3',
+    //'logo_img_xl' => null,
+    //'logo_img_xl_class' => 'brand-image-xs',
+    //'logo_img_alt' => 'Admin Logo',
 
     /*
     |--------------------------------------------------------------------------
@@ -85,13 +85,13 @@ return [
 
     'auth_logo' => [
         'enabled' => false,
-        'img' => [
+        /*'img' => [
             'path' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
             'alt' => 'Auth Logo',
             'class' => '',
             'width' => 50,
             'height' => 50,
-        ],
+        ],*/
     ],
 
     /*
@@ -253,7 +253,7 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => 'admin',
+    'dashboard_url' => 'admin/estacionamentos',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',

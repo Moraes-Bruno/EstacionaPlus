@@ -24,7 +24,7 @@ Route::get('/', [EstacionamentoController::class, 'show'])->name('index');
 Route::get('/home', [EstacionamentoController::class, 'showhome'])->name('home');
 
 Route::group(['middleware' => 'checkAdminSession'], function () {//Session de Admin
-    Route::get('/admin', [AdminController::class, 'show']);
+
     Route::get('/admin/usuarios', [UsuarioController::class, 'listar'])->name('usuarios.listar');
     Route::post('/admin/usuarios/inserir', [UsuarioController::class, 'inserir'])->name('usuario.inserir');
     Route::get('/admin/usuarios/form/{_id?}', [UsuarioController::class, 'usuarios_form'])->name('usuario.form');
@@ -40,7 +40,6 @@ Route::group(['middleware' => 'checkAdminSession'], function () {//Session de Ad
 });
 
 Route::group(['middleware' => 'checkUserSession'], function () {//Session de Usuario
-    Route::get('/index2', [UsuarioController::class, 'showIndex2'])->name('index2');//Redireciona para o index 2
     Route::get('/logout', [UsuarioController::class, 'logout'])->name('logout');//Faz o logout do usuario
     Route::get('/userInfo',  [UsuarioController::class, 'showProfile'])->name('userProfile');
     Route::post('/userInfo', [UsuarioController::class, 'alterarUser'])->name('usuario.alterarUser');

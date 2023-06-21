@@ -15,35 +15,6 @@
     margin: 0;
 }
 
-.normal {
-    background-color: #88A0A8;
-    color: white;
-    /* Cor para vaga normal */
-}
-
-.deficiente {
-    background-color: #546A76;
-    color: white;
-    /* Cor para vaga de deficiente */
-}
-
-.idoso {
-    background-color: #334751;
-    color: white;
-    /* Cor para vaga de idoso */
-}
-
-.autista {
-    background-color: #B4656F;
-    color: white;
-    /* Cor para vaga de autista */
-}
-
-.vazio {
-    background-color: white;
-    /* Cor para vaga vazia */
-}
-
 .vagacima {
     width: 30px;
     height: 60px;
@@ -71,9 +42,12 @@ td {
     margin: 0;
 }
 
-td {
-    padding: 0;
-    margin: 0;
+.ocupada {
+    background-color: rgba(190, 0, 0, 0.7);
+}
+
+.livre {
+    background-color: rgba(7, 78, 0, 0.7);
 }
 
 .ladoDireito {

@@ -70,7 +70,7 @@
                             var indexEspacoLadoDireito = i + ',' + y;
                             var espacoLadoDireito = dadosVagas[indexEspacoLadoDireito];
                             var direita = espacoLadoDireito && espacoLadoDireito.Tipo !== "Vazio" ? "" : 'ladoDireito';
-                            var lado = esquerda || direita;
+                            var lado = esquerda && direita ? esquerda + ' ' + direita : esquerda || direita;
                             var w = i - 1;
                             var indexEspacoAcima = w + ',' + j;
                             var espacoAcima = dadosVagas[indexEspacoAcima];
@@ -109,9 +109,11 @@
     </head>
 
     <body class="pt-4">
-
-        @include('navbar');
-
+        @if(session()->has('user_id'))
+        @include('navbarLogged')
+        @else
+        @include('navbar')
+        @endif
         <!--The div element for the map -->
         <div id="map"></div>
         <!-- Adicione o modal ao seu HTML -->
@@ -129,10 +131,10 @@
                         <p id="modal-vagas_disponiveis"></p>
                         <p id="modal-endereco"></p>
                         <div id="tabela-vagas"></div>
-                        </div>
                     </div>
                 </div>
             </div>
+        </div>
         </div>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAtI-_4umSKFC-kkL4yNoUTRfBI-Qo0NDM&callback=initMap&v=weekly" defer></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>

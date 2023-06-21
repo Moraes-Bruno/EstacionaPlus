@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class UsuarioController extends Controller
 {
- 
+
     public function showLogin()
     {
         return view('login');
@@ -19,11 +19,10 @@ class UsuarioController extends Controller
     public function usuarios_form($_id = false)
     {
         $estacionamentos = Estacionamento::all();
-        if($_id){
+        if ($_id) {
             $dados = Usuário::findOrFail($_id);
             return view('usuarios_form', compact('dados'), compact('estacionamentos'));
-        }
-        else{
+        } else {
             return view('usuarios_form', compact('estacionamentos'));
         }
     }
@@ -54,19 +53,19 @@ class UsuarioController extends Controller
         // Verificar se o email já está cadastrado
         $email = $request->input('email');
         $usuarioExistente = Usuário::where('email', $email)->first();
-    
+
         if ($usuarioExistente) {
             // Email já cadastrado, redirecionar para a mesma página e exibir alerta
             return redirect()->back()->with('email_cadastrado', true);
         }
-    
+
         // Criar novo usuário
         $dados = new Usuário($request->all());
         $dados->save();
-    
-        return redirect()->route('index');
+        $request->session()->put('user_id', $email);
+        return redirect()->route('home');
     }
-    
+
     public function listar()
     {
         $usuarios = Usuário::all();
@@ -77,7 +76,7 @@ class UsuarioController extends Controller
         $dados = Usuário::findOrFail($id);
         return view('detalhes_usuario', compact('dados'));
     }
-    public function alterar(Request $request, $id)//Função do painel do admin
+    public function alterar(Request $request, $id) //Função do painel do admin
     {
         $dados = Usuário::findOrFail($id);
         $dados->nome = $request->nome;
@@ -88,7 +87,7 @@ class UsuarioController extends Controller
         return redirect()->route('usuarios.listar');
     }
 
-    public function alterarUser(Request $request)//Função para o usuario alterar as suas informações
+    public function alterarUser(Request $request) //Função para o usuario alterar as suas informações
     {
         $dados = Usuário::where('email', $request->input('email'))->first();
         $dados->nome = $request->nome;
@@ -104,56 +103,48 @@ class UsuarioController extends Controller
     }
 
     public function userLogin(Request $request)
-{
-    $request->validate([
-        'email' => 'required|email',
-        'senha' => 'required'
-    ], [
-        'email.required' => 'O campo de email é obrigatório',
-        'email.email' => 'Este campo deve possuir um email válido',
-        'senha.required' => 'O campo senha é obrigatório'
-    ]);
+    {
+        $request->validate([
+            'email' => 'required|email',
+            'senha' => 'required'
+        ], [
+            'email.required' => 'O campo de email é obrigatório',
+            'email.email' => 'Este campo deve possuir um email válido',
+            'senha.required' => 'O campo senha é obrigatório'
+        ]);
 
-    $email = $request->input('email');
-    $senha = $request->input('senha');
+        $email = $request->input('email');
+        $senha = $request->input('senha');
 
-    // Perform the login logic here
-    // You can use the $email and $senha variables to authenticate the user
+        // Perform the login logic here
+        // You can use the $email and $senha variables to authenticate the user
 
-    // Example login logic:
-    $user = Usuário::where('email', $email)->first();
+        // Example login logic:
+        $user = Usuário::where('email', $email)->first();
 
-    if ($user && $user->senha === $senha) {
-        
-        // Login successful
-        // Store the user's authentication status in the session
-        $request->session()->put('user_id', $user->email);
-        
-        return redirect()->route('index2');
-    } else {
-        // Login failed
-        return redirect()->back()->with('login_failed', true);
+        if ($user && $user->senha === $senha) {
+
+            // Login successful
+            // Store the user's authentication status in the session
+            $request->session()->put('user_id', $email);
+
+            return redirect()->route('home');
+        } else {
+            // Login failed
+            return redirect()->back()->with('login_failed', true);
+        }
     }
- }
 
-    public function logout(Request $request){
+    public function logout(Request $request)
+    {
         $request->session()->forget('user_id');
         $request->session()->flush();
 
         return redirect()->route('index');
     }
 
-    public function showIndex2()
+    public function showProfile()
     {
-            $estacionamentos = Estacionamento::all();
-            return view('index2', ['estacionamentos' => $estacionamentos]);
+        return view('userInfo');
     }
-
-    public function showProfile(){
-            return view('userInfo');
-    }
-
-   
-
-    
 }

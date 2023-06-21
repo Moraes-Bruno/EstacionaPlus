@@ -71,7 +71,7 @@
             var indexEspacoLadoDireito = i + ',' + y;
             var espacoLadoDireito = dadosVagas[indexEspacoLadoDireito];
             var direita = espacoLadoDireito && espacoLadoDireito.Tipo !== "Vazio" ? "" : 'ladoDireito';
-            var lado = esquerda || direita;
+            var lado = esquerda && direita ? esquerda + ' ' + direita : esquerda || direita;
             var w = i - 1;
             var indexEspacoAcima = w + ',' + j;
             var espacoAcima = dadosVagas[indexEspacoAcima];
@@ -112,7 +112,7 @@
     <div class="container-fluid mb-2">
         <div class="float-right">
             <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
                 <li class="breadcrumb-item"><a href="/admin/estacionamentos">Estacionamentos</a></li>
                 <li class="breadcrumb-item active">Detalhes</li>
             </ol>
