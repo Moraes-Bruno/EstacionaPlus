@@ -87,6 +87,8 @@ class UsuarioController extends Controller
         return redirect()->route('usuarios.listar');
     }
 
+
+
     public function alterarUser(Request $request) //Função para o usuario alterar as suas informações
     {
         $dados = Usuário::where('email', $request->input('email'))->first();
@@ -146,5 +148,52 @@ class UsuarioController extends Controller
     public function showProfile()
     {
         return view('userInfo');
+    }
+
+    public function favoritar(Request $request)
+    {
+        $nome = $request->input('nome');
+
+        $user_id = session('user_id');
+
+        $usuario = Usuário::where('email', $user_id)->first();
+
+        $favoritos = $usuario->favoritos ?? [];
+
+        // Verifica se o nome já está presente no array de favoritos
+        if (in_array($nome, $favoritos)) {
+            return response()->json(['message' => 'Estacionamento já favoritado']);
+        }
+
+        $favoritos[] = $nome;
+
+        // Atualiza o documento do usuário no MongoDB
+        Usuário::where('email', $user_id)
+            ->update(['favoritos' => $favoritos]);
+
+        return response()->json(['message' => 'Estacionamento cadastrado com sucesso']);
+    }
+
+    public function removerFavorito(Request $request)
+    {
+        $nome = $request->input('nome');
+        $user_id = session('user_id');
+
+        $usuario = Usuário::where('email', $user_id)->first();
+        $favoritos = $usuario->favoritos ?? [];
+
+        // Constrói um novo array de favoritos, excluindo o elemento desejado
+        $novosFavoritos = [];
+        foreach ($favoritos as $favorito) {
+            if ($favorito !== $nome) {
+                $novosFavoritos[] = $favorito;
+            }
+        }
+
+        // Atualiza o documento do usuário no MongoDB
+        Usuário::where('email', $user_id)
+            ->update(['favoritos' => $novosFavoritos]);
+
+        return response()->json(['message' => 'Estacionamento removido dos favoritos']);
     }
 }
