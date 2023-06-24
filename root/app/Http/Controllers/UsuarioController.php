@@ -62,8 +62,8 @@ class UsuarioController extends Controller
         // Criar novo usuário
         $dados = new Usuário($request->all());
         $dados->save();
-        $request->session()->put('user_id', $email);
-        return redirect()->route('home');
+
+        return redirect()->route('index');
     }
 
     public function listar()
@@ -128,9 +128,9 @@ class UsuarioController extends Controller
 
             // Login successful
             // Store the user's authentication status in the session
-            $request->session()->put('user_id', $email);
+            $request->session()->put('user_id', $user->email);
 
-            return redirect()->route('home');
+            return redirect()->route('index2');
         } else {
             // Login failed
             return redirect()->back()->with('login_failed', true);
@@ -145,10 +145,18 @@ class UsuarioController extends Controller
         return redirect()->route('index');
     }
 
+    public function showIndex2()
+    {
+        $estacionamentos = Estacionamento::all();
+        return view('index2', ['estacionamentos' => $estacionamentos]);
+    }
+
     public function showProfile()
     {
         return view('userInfo');
     }
+
+
 
     public function favoritar(Request $request)
     {

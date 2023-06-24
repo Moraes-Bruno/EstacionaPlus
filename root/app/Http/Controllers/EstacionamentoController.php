@@ -11,7 +11,11 @@ class EstacionamentoController extends Controller
     {
         return view('index');
     }
-
+    public function showIndex2()
+    {
+        $estacionamentos = Estacionamento::all();
+        return view('index2', ['estacionamentos' => $estacionamentos]);
+    }
     public function showhome()
     {
         $estacionamentos = Estacionamento::all();
