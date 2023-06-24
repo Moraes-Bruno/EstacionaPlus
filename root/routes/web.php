@@ -24,7 +24,6 @@ Route::get('/', [EstacionamentoController::class, 'show'])->name('index');
 Route::get('/home', [EstacionamentoController::class, 'showhome'])->name('home');
 
 Route::group(['middleware' => 'checkAdminSession'], function () {//Session de Admin
-    Route::get('/admin', [AdminController::class, 'show']);
     Route::get('/admin/usuarios', [UsuarioController::class, 'listar'])->name('usuarios.listar');
     Route::post('/admin/usuarios/inserir', [UsuarioController::class, 'inserir'])->name('usuario.inserir');
     Route::get('/admin/usuarios/form/{_id?}', [UsuarioController::class, 'usuarios_form'])->name('usuario.form');

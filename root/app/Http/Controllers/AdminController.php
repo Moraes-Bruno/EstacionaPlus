@@ -11,10 +11,10 @@ class AdminController extends Controller
 {
     public function show()
     {
-        
+
 
         if (session('admin_authenticated')) {
-            return view('admin');
+            return view('admin/estacionamentos');
         } else {
             return redirect()->route('index');
         }
@@ -44,8 +44,8 @@ class AdminController extends Controller
         // Login bem-sucedido
         // Armazene o status de autenticação do admin na sessão
         $request->session()->put('admin_authenticated', true);
-        
-        return redirect()->route('admin');
+
+        return redirect()->route('admin/estacionamentos');
     } else {
         // Login falhou
         return redirect()->back()->with('login_failed', true);
