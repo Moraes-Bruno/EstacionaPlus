@@ -57,6 +57,5 @@ Route::post('/login', [UsuarioController::class, 'userLogin'])->name('usuario.us
 //Processo de Login do Admin
 Route::view('/adminLogin','adminLogin')->name('adminLogin');
 Route::post('/adminLogin',[AdminController::class, 'adminLogin'])->name('admin.adminLogin');
-Route::get('/admin',[AdminController::class, 'show'])->name('admin');
 
 
