@@ -179,7 +179,7 @@ class UsuarioController extends Controller
         Usuário::where('email', $user_id)
             ->update(['favoritos' => $favoritos]);
 
-        return response()->json(['message' => 'Estacionamento cadastrado com sucesso']);
+        return response()->json(['message' => 'Estacionamento favoritado com sucesso']);
     }
 
     public function removerFavorito(Request $request)
