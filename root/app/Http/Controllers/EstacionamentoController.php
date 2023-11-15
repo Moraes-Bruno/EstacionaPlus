@@ -116,4 +116,12 @@ class EstacionamentoController extends Controller
         $dados = Estacionamento::destroy($id);
         return redirect()->route('estacionamentos.listar');
     }
+
+    public function statusVaga($nome){
+    
+        $dados = Estacionamento::where('nome', $nome)->firstOrFail();
+
+        return response()->json($dados);
+
+    }
 }

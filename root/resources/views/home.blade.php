@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
         <link rel="stylesheet" href="../css/index.css">
         <link rel="stylesheet" href="../css/estacionamento.css">
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
         <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -38,7 +38,78 @@
                     });
                     marker.addListener('click', () => {
                         exibirModal(estacionamento);
+                        fazerRequisicao(estacionamento);
                     });
+                });
+
+                var intervaloAtualizacao;
+
+                // Função para atualizar o modal
+                function atualizarModal(estacionamento, dadosVagas) {
+                    // Atualize dinamicamente o conteúdo do modal com base nos dados recebidos
+                    document.getElementById('modal-titulo').textContent = estacionamento.nome;
+                    document.getElementById('modal-vagas').textContent = 'Total de Vagas: ' + estacionamento.totalVagas;
+
+                    // Atualize a tabela de vagas
+                    atualizarTabelaVagas(dadosVagas);
+                }
+
+                // Função para atualizar a tabela de vagas
+                function atualizarTabelaVagas(dadosVagas) {
+                    // Atualize dinamicamente a tabela de vagas com base nos dados recebidos
+                    var tabelaHTML = '<table>';
+                    for (var i = 0; i < 12; i++) {
+                        tabelaHTML += '<tr>';
+                        for (var j = 0; j < 24; j++) {
+                            var index = i + ',' + j;
+                            var vaga = dadosVagas[index];
+                            var tipoVaga = vaga ? vaga.Tipo : 'Vazio';
+                            var status = vaga.Status == 1 ? 'ocupada' : 'livre';
+                            // Atualize as células da tabela com base nos dadosVagas
+                            // Adapte conforme necessário
+                            tabelaHTML += '<td class="' + tipoVaga.toLowerCase() + '">';
+                            tabelaHTML += '<div style="display: flex; justify-content: center;">';
+                            tabelaHTML += vaga.Tipo !== "Vazio" ? (vaga.Tipo == "Objeto" ? '<div class="objeto" style="display: flex;justify-content: center;align-items: center;"></div>' : '<div class="vaga ' + status + '" style="display: flex;justify-content: center;align-items: center;"></div>') : '<div class="vazio col"></div>';
+                            tabelaHTML += '</div>';
+                            tabelaHTML += '</td>';
+                        }
+                        tabelaHTML += '</tr>';
+                    }
+                    tabelaHTML += '</table>';
+
+                    // Insira a tabela atualizada no elemento desejado
+                    document.getElementById('tabela-vagas').innerHTML = tabelaHTML;
+                }
+
+                // Função para fazer a requisição AJAX e atualizar o modal
+                function fazerRequisicao(estacionamento) {
+                    try {
+                        if (estacionamento && estacionamento.nome) {
+                            var nome = estacionamento.nome;
+                            $.ajax({
+                                url: '/rota-status' + nome,
+                                method: 'GET',
+                                dataType: 'json',
+                                success: function(dados) {
+                                    console.log('Dados carregados com sucesso:', dados);
+                                    atualizarModal(estacionamento, dados.vagas);
+                                },
+                                error: function(erro) {
+                                    console.error('Erro ao carregar dados:', erro);
+                                }
+                            });
+                        } else {
+                            throw new Error('Estacionamento ou nome de estacionamento não definido.');
+                        }
+                    } catch (erro) {
+                        console.error('Ocorreu um erro:', erro.message);
+                    }
+                }
+
+        
+                // Lidera o evento de fechamento do modal para limpar o intervalo
+                $('#meuModal').on('hidden.bs.modal', function() {
+                    clearInterval(intervaloAtualizacao);
                 });
 
                 function exibirModal(estacionamento) {
@@ -101,7 +172,18 @@
                     // Insere a tabela no elemento desejado
                     document.getElementById('tabela-vagas').innerHTML = tabelaHTML;
                     $('#meuModal').modal('show');
+
+                    //Para alterar o tempo entre cada requisição,altere o valor presente nesta função|1000=1segundo
+                    var intervaloAtualizacao = setInterval(function() {
+                        fazerRequisicao(estacionamento);
+                    }, 5000);
+
+                    $('#meuModal').on('hidden.bs.modal', function() {
+                        clearInterval(intervaloAtualizacao);
+                    });
+
                 }
+
             }
         </script>
 

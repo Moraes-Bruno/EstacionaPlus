@@ -23,6 +23,9 @@ use Illuminate\Support\Facades\Session;
 Route::get('/', [EstacionamentoController::class, 'show'])->name('index');
 Route::get('/home', [EstacionamentoController::class, 'showhome'])->name('home');
 
+
+Route::get('/rota-status{nome}',  [EstacionamentoController::class, 'statusVaga']);
+
 Route::group(['middleware' => 'checkAdminSession'], function () {//Session de Admin
     Route::get('/admin/usuarios', [UsuarioController::class, 'listar'])->name('usuarios.listar');
     Route::post('/admin/usuarios/inserir', [UsuarioController::class, 'inserir'])->name('usuario.inserir');
