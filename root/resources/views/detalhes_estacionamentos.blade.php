@@ -90,9 +90,9 @@
                 default:
                     icone = '';
             }
-            tabelaHTML += '<td class="' + tipoVaga.toLowerCase() + '">';
+            tabelaHTML += vaga.Tipo !== "Vazio" && vaga.Tipo != "Objeto" ? '<td class="vagaCadastrada ' + tipoVaga.toLowerCase() + '">': '<td class="' + tipoVaga.toLowerCase() + '">';
             tabelaHTML += '<div style="display: flex; justify-content: center;">';
-            tabelaHTML += vaga.Tipo !== "Vazio" ? (vaga.Tipo == "Objeto" ? '<div class="objeto" style="display: flex;justify-content: center;align-items: center;"></div>' : (proximoElementoNaoVazio ? '<div class="vagacima ' + status + ' ' + lado + '" style="display: flex;justify-content: center;align-items: center;"> ' + icone + ' </div>' : '<div class="vaga ' + status + ' ' + lado + ' ' + ElementoAnteriorVazio + '" style="display: flex;justify-content: center;align-items: center;"> ' + icone + ' </div>')) : '<div class="vazio col"></div>';
+            tabelaHTML += vaga.Tipo !== "Vazio" ? (vaga.Tipo == "Objeto" ? '<div class="objeto" style="display: flex;justify-content: center;align-items: center;"></div>' : (proximoElementoNaoVazio ? '<div style="display: flex;justify-content: center;align-items: center;"> ' + icone + ' </div>' : '<div class="' + ElementoAnteriorVazio + '" style="display: flex;justify-content: center;align-items: center;"> ' + icone + ' </div>')) : '<div class="vazio col"></div>';
             tabelaHTML += '</div>';
             tabelaHTML += '</td>';
         }
@@ -148,7 +148,7 @@
                     <div id="tabela-vagas"></div>
                 </div>
             </div>
-            <div class="btn-group" role="group" aria-label="Ações">
+            <div class="btn-group p-3" role="group" aria-label="Ações">
                 <a class="btn btn-info btn-sm mx-1" href="{{ route('estacionamento.form', $dados->_id) }}">
                     <i class="fas fa-pencil-alt"></i>
                     Editar

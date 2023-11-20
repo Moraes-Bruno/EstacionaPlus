@@ -1,36 +1,14 @@
-.vaga {
-    width: 30px;
-    height: 60px;
-    padding: 0;
-    margin: 0;
-    border-top: 3px solid;
-    border-left: 3px solid;
-    border-right: 3px solid;
-}
-
 .vazio {
     width: 30px;
-    height: 60px;
+    height: 56px;
     padding: 0;
     margin: 0;
-}
-
-.vagacima {
-    width: 30px;
-    height: 60px;
-    border-bottom: 3px solid;
-    border-left: 3px solid;
-    border-right: 3px solid;
 }
 
 .objeto {
     width: 30px;
-    height: 60px;
+    height: 56px;
     background-color: black;
-}
-
-.AnteriorVazio {
-    border-top: 6px solid;
 }
 
 table {
@@ -40,20 +18,33 @@ table {
 td {
     padding: 0;
     margin: 0;
+    width: 30px;
+    height: 56px;
+    border: 1px solid;
 }
 
 .ocupada {
-    background-color: rgba(190, 0, 0, 0.7);
+    background-color: rgba(190, 0, 0, 0.5);
 }
 
 .livre {
-    background-color: rgba(7, 78, 0, 0.7);
+    background-color: rgba(7, 78, 0, 0.5);
 }
 
-.ladoDireito {
-    border-right: 6px solid;
+.imgsCarros{
+    padding: 0;
+    margin: 0;
 }
 
-.ladoEsquerdo {
-    border-left: 6px solid;
+.vaga-container{
+    padding-top: 2px;
+    padding-bottom: 2px;
+    margin: 0;
+    width: 30px;
+    height: 56px;
+    border: 1px solid;
+}
+
+.vagaCadastrada{
+    background-color: rgba(166, 166, 166)
 }
