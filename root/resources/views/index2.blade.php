@@ -53,7 +53,26 @@
 
                 // Atualize a tabela de vagas
                 atualizarTabelaVagas(dadosVagas);
+                qtdVagaDisponivel(dadosVagas);
             }
+
+            function qtdVagaDisponivel(dadosVagas) {
+                    var disponivel = 0;
+
+                    for (var i = 0; i < 12; i++) {
+                        for (var j = 0; j < 24; j++) {
+                            var index = i + ',' + j;
+                            var vaga = dadosVagas[index];
+                            if (vaga.Status == 0 && vaga.Tipo != "Vazio") {
+                                disponivel += 1;
+                            } else if (vaga.Status == 1 && vaga.Tipo != "Vazio") {
+                                disponivel  >= 0? -1 : disponivel = 0
+                            }
+                        }
+                    }
+
+                    document.getElementById('modal-vagas_disponiveis').textContent = 'Vagas Disponíveis: ' + disponivel;
+                }
 
             // Função para atualizar a tabela de vagas
             function atualizarTabelaVagas(dadosVagas) {

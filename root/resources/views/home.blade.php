@@ -52,7 +52,28 @@
 
                     // Atualize a tabela de vagas
                     atualizarTabelaVagas(dadosVagas);
+                    qtdVagaDisponivel(dadosVagas);
+
                 }
+
+                function qtdVagaDisponivel(dadosVagas) {
+                    var disponivel = 0;
+
+                    for (var i = 0; i < 12; i++) {
+                        for (var j = 0; j < 24; j++) {
+                            var index = i + ',' + j;
+                            var vaga = dadosVagas[index];
+                            if (vaga.Status == 0 && vaga.Tipo != "Vazio") {
+                                disponivel += 1;
+                            } else if (vaga.Status == 1 && vaga.Tipo != "Vazio") {
+                                disponivel  >= 0? -1 : disponivel = 0
+                            }
+                        }
+                    }
+
+                    document.getElementById('modal-vagas_disponiveis').textContent = 'Vagas Disponíveis: ' + disponivel;
+                }
+
 
                 // Função para atualizar a tabela de vagas
                 function atualizarTabelaVagas(dadosVagas) {
@@ -120,6 +141,9 @@
 
                             tabelaHTML += '</div>';
                             tabelaHTML += '</td>';
+
+
+                            //console.log(vaga);
                         }
 
                         tabelaHTML += '</tr>';
@@ -142,7 +166,7 @@
                                 method: 'GET',
                                 dataType: 'json',
                                 success: function(dados) {
-                                    console.log('Dados carregados com sucesso:', dados);
+                                    //console.log('Dados carregados com sucesso:', dados);
                                     atualizarModal(estacionamento, dados.vagas);
                                 },
                                 error: function(erro) {
@@ -166,8 +190,7 @@
                 function exibirModal(estacionamento) {
                     document.getElementById('modal-titulo').textContent = estacionamento.nome;
                     document.getElementById('modal-vagas').textContent = 'Total de Vagas: ' + estacionamento.totalVagas;
-                    document.getElementById('modal-vagas_disponiveis').textContent = 'Vagas Disponíveis: ' + estacionamento
-                        .totalVagas;
+                    document.getElementById('modal-vagas_disponiveis').textContent = 'Vagas Disponíveis: '
                     document.getElementById('modal-endereco').textContent = 'Endereço: ' + estacionamento.endereco;
                     // Dados das vagas obtidos do controlador (exemplo)
                     var dadosVagas = estacionamento.vagas
